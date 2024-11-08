@@ -57,8 +57,18 @@ def loginadmin():
   
   
 
-@tandtweb.route('/userlogin')
+@tandtweb.route('/userlogin',methods=['GET', 'POST'])
 def userlogin():
+  if request.method=='POST':
+    id=request.form['id']
+    password=request.form['password']
+    
+    user=customer.query.filter_by(id=id).first()
+    if user and user.password==password:
+      session['user_id']=user.id
+      return render_template("userhome.html")
+    else:
+      return render_template("userloginfail.html")
   return render_template("userlogin.html")
 
 @tandtweb.route('/usersignup',methods=['GET', 'POST'])
