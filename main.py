@@ -35,6 +35,10 @@ class customer(db.Model,UserMixin):
 def home():
   return render_template('home.html')
 
+@tandtweb.route('/aboutus')
+def aboutus():
+  return render_template('aboutus.html')
+
 #admin login function
 @tandtweb.route('/admin', methods=['GET', 'POST'])
 def loginadmin():
