@@ -94,25 +94,25 @@ def logincourier():
 
     return render_template('courierlogin.html')
   
-#supplier login function
-@tandtweb.route('/supplier', methods=['GET', 'POST'])
-def loginsupplier():
+#sponsor login function
+@tandtweb.route('/sponsor', methods=['GET', 'POST'])
+def loginsponsor():
     if request.method == 'POST':
-        supplierusername = request.form['username']
-        supplierpassword = request.form['password']
+        sponsorusername = request.form['username']
+        sponsorpassword = request.form['password']
         
-        #only this id can login as supplier
-        supplier_access = {
+        #only this id can login as sponsor
+        sponsor_access = {
             '1211111953': 'shah'
         }
 
-        if supplierusername in supplier_access and supplierpassword == supplier_access[supplierusername]:
-            session['username'] = supplierusername
-            return render_template('supplierhome.html')
+        if sponsorusername in sponsor_access and sponsorpassword == sponsor_access[sponsorusername]:
+            session['username'] = sponsorusername
+            return render_template('sponsorhome.html')
         else:
-            return render_template('supplierfaillogin.html')
+            return render_template('sponsorfaillogin.html')
 
-    return render_template('supplierlogin.html')
+    return render_template('sponsorlogin.html')
   
   
 #customer login
