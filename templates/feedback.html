@@ -19,7 +19,10 @@
         <input type="text" name="ph" id="ph" pattern="\d{10,}" title="Must be at least 10 digits" required><br><br>
 
         <label for="content">Feedback:</label><br>
-        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+        <textarea name="content" id="content" rows="6" required></textarea><br>
+
+        <label>date:</label>
+        <input type="date" name="date" required>
 
         <button type="submit">Submit Feedback</button>
         <button type="button" onclick="window.location.href='/customerhome'">Back</button>
