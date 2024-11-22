@@ -4,7 +4,7 @@ import sqlite3
 c = sqlite3.connect('database.sqlite3')
 
 # Correct DELETE query
-c.execute("DELETE FROM customer WHERE id = '040805100671'")
+c.execute("DROP TABLE Feedback;")
 
 # Commit the changes
 c.commit()
