@@ -42,6 +42,8 @@ class Feedback(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     ph = db.Column(db.String(150), unique=True, nullable=False)
     content = db.Column(db.String(1500), nullable=False)
+    date=db.Column(db.DateTime(),default=datetime.utcnow)
+    
   
   
 #################################################################################################################################################################################################
@@ -54,6 +56,7 @@ def feedback():
         email = request.form.get('email')
         ph = request.form.get('ph')
         content = request.form.get('content')
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d')
 
         # Basic server-side validation
         if not name or not email or not ph or not content:
@@ -89,6 +92,18 @@ def home():
 @tandtweb.route('/customerhome')
 def customerhome():
   return render_template('customerhome.html')
+
+@tandtweb.route('/adminhome')
+def adminhome():
+  return render_template('adminhome.html')
+
+@tandtweb.route('/sponsorhome')
+def sponsorhome():
+  return render_template('sponsorhome.html')
+
+@tandtweb.route('/courierhome')
+def courierhome():
+  return render_template('courierhome.html')
 
 
 @tandtweb.route('/aboutus')
