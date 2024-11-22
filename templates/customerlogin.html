@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Customer Login</title>
-    <link rel="stylesheet" href="/static/bill.css">
+    <link rel="stylesheet" href="/static/login.css">
 </head>
 <body>
     <figure class="logo">
@@ -12,14 +12,14 @@
     <h1>Customer Login</h1>
     <form action="/customer" method="post">
         <label>ID:</label>
-        <input name="id" required><br><br>
+        <input name="id" required>
 
         <label>Password:</label>
-        <input type=password name="password" required><br><br>
+        <input type=password name="password" required><br>
 
         <p><a href="/customersignup">No account? Sign up right now</a></p>
 
-        <button type="submit">Log in</button><br>
+        <button type="submit">Log in</button>
             <button type="button" onclick="window.location.href='/'">Back</button>
         
     </form>
