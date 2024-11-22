@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,session
+from flask import Flask,render_template,request,session,flash
 
 #database
 from flask_sqlalchemy import SQLAlchemy
@@ -35,9 +35,48 @@ class customer(db.Model,UserMixin):
   gender=db.Column(db.String(150))
   dob=db.Column(db.DateTime(),default=datetime.utcnow)
   
+  
+class Feedback(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    ph = db.Column(db.String(150), unique=True, nullable=False)
+    content = db.Column(db.String(1500), nullable=False)
+  
+  
 #################################################################################################################################################################################################
   
-  
+@tandtweb.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if request.method == 'POST':
+        # Get form data
+        name = request.form.get('name')
+        email = request.form.get('email')
+        ph = request.form.get('ph')
+        content = request.form.get('content')
+
+        # Basic server-side validation
+        if not name or not email or not ph or not content:
+            flash('All fields are required!', 'error')
+            return render_template('feedback.html', name=name, email=email, ph=ph, content=content)
+
+        # Save feedback (allow duplicates)
+        new_feedback = Feedback(name=name, email=email, ph=ph, content=content)
+        db.session.add(new_feedback)
+        db.session.commit()
+
+        flash('Thank you for your feedback!', 'success')
+        return render_template('feedback.html')
+
+    # Render feedback form on GET request
+    return render_template('feedback.html')
+
+@tandtweb.route('/viewfeedback', methods=['GET'])
+def view_feedback():
+    feedback_list = Feedback.query.all()  # Query all feedback entries
+    return render_template('viewfeedback.html', feedback_list=feedback_list)
+
+
 #################################################################################################################################################################################################
 #Log in & sign up
 #################################################################################################################################################################################################
@@ -46,6 +85,10 @@ class customer(db.Model,UserMixin):
 @tandtweb.route('/')
 def home():
   return render_template('home.html')
+
+@tandtweb.route('/customerhome')
+def customerhome():
+  return render_template('customerhome.html')
 
 
 @tandtweb.route('/aboutus')
