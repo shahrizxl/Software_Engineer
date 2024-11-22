@@ -32,8 +32,10 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Content</th>
+                <th>Date</th>
             </tr>
         </thead>
+
         <tbody>
             {% for feedback in feedback_list %}
                 <tr>
@@ -42,9 +44,11 @@
                     <td>{{ feedback.email }}</td>
                     <td>{{ feedback.ph }}</td>
                     <td>{{ feedback.content }}</td>
+                    <td>{{ feedback.date }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <button type="button" onclick="window.location.href='/adminhome'">Back</button>
 </body>
 </html>
