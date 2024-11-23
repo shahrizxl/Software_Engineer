@@ -41,8 +41,66 @@ body {
 .button-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
+}
+
+.topnav {
+  list-style-type: none;
+  background-color: #6f86b6;
+  
+
+}
+
+.topnav li {
+  float: left;
+  font-weight: bolder;
+  
+  
+}
+
+.topnav li a {
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 15px 60px;
+  text-decoration: none;
+  
+}
+
+.topnav li a:hover {
+  background-color: #eaeaea;
+}
+
+.dropdown {
+  position: relative;
+  
+}
+
+li{
+  background-color: #6f86b6;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #6f86b6;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content li a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 button {
