@@ -1,4 +1,6 @@
 from flask import Flask,render_template,request,session,flash
+from werkzeug.utils import secure_filename
+from werkzeug.exceptions import abort
 
 #database
 from flask_sqlalchemy import SQLAlchemy
@@ -22,13 +24,22 @@ db.init_app(tandtweb)
 with tandtweb.app_context():
   create_database()
   
+import base64
+  
+@tandtweb.template_filter('b64encode')
+def b64encode_filter(value):
+    if value:
+        return base64.b64encode(value).decode('utf-8')  # Convert bytes to a base64 string
+    return ''
+  
   
 #################################################################################################################################################################################################  
 #Tables
 #################################################################################################################################################################################################
 
 class customer(db.Model,UserMixin):
-  id=db.Column(db.Integer,primary_key=True)
+  id=db.Column(db.Integer, primary_key=True)
+  name=db.Column(db.String(150),unique=True)
   password=db.Column(db.String(150))
   email=db.Column(db.String(100),unique=True)
   ph=db.Column(db.String(150),unique=True)
@@ -44,6 +55,15 @@ class Feedback(db.Model, UserMixin):
     content = db.Column(db.String(1500), nullable=False)
     date=db.Column(db.DateTime(),default=datetime.utcnow)
     
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the product
+    productname = db.Column(db.String(150), nullable=False)
+    productprice = db.Column(db.Float, nullable=False)
+    productdate = db.Column(db.DateTime, default=datetime.utcnow)
+    productstock = db.Column(db.Integer, nullable=False)
+    productpicture = db.Column(db.LargeBinary, nullable=False)  # Stores the binary data of the image
+    picture_mimetype = db.Column(db.String(50), nullable=False)  # To store the image format (e.g., 'image/jpeg')
+  
   
   
 #################################################################################################################################################################################################
@@ -78,7 +98,46 @@ def feedback():
 def view_feedback():
     feedback_list = Feedback.query.all()  # Query all feedback entries
     return render_template('viewfeedback.html', feedback_list=feedback_list)
+#################################################################################################################################################################################################
 
+@tandtweb.route('/addprod', methods=['GET', 'POST'])
+def add_product():
+    if request.method == 'POST':
+        id = request.form['id']
+        productname = request.form['productname']
+        productprice = float(request.form['productprice'])
+        productstock = int(request.form['productstock'])
+        image = request.files['productpicture']
+        
+        if image:
+            filename = secure_filename(image.filename)
+            mimetype = image.mimetype
+            image_data = image.read()  # Read the binary data
+            
+            # Create a new Product instance
+            new_product = Product(
+                id=id,
+                productname=productname,
+                productprice=productprice,
+                productstock=productstock,
+                productpicture=image_data,
+                picture_mimetype=mimetype
+            )
+            
+            # Save to the database
+            db.session.add(new_product)
+            db.session.commit()
+            
+            return render_template('add_product.html')  # Redirect to the same page or another
+
+    return render_template('add_product.html')
+  
+
+@tandtweb.route('/products', methods=['GET'])
+def view_products():
+    # Fetch all products from the database
+    products = Product.query.all()
+    return render_template('view_products.html', products=products)
 
 #################################################################################################################################################################################################
 #Log in & sign up
@@ -195,6 +254,7 @@ def customerlogin():
 def signup():
     if request.method == 'POST':
         id = request.form['id']
+        name= request.form['name']
         password = request.form['password']
         email = request.form['email']
         ph=request.form['ph']
@@ -204,6 +264,7 @@ def signup():
         
         new_customer = customer(
         id=id,
+        name=name,
         password=password,
         email=email,
         ph=ph,
