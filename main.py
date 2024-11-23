@@ -55,6 +55,7 @@ class Feedback(db.Model, UserMixin):
     content = db.Column(db.String(1500), nullable=False)
     date=db.Column(db.DateTime(),default=datetime.utcnow)
     
+    
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the product
     productname = db.Column(db.String(150), nullable=False)
@@ -64,7 +65,13 @@ class Product(db.Model):
     productpicture = db.Column(db.LargeBinary, nullable=False)  # Stores the binary data of the image
     picture_mimetype = db.Column(db.String(50), nullable=False)  # To store the image format (e.g., 'image/jpeg')
   
-  
+class Money(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(10))  # 'Add' or 'Subtract'
+    amount = db.Column(db.Float, nullable=False)
+    purpose = db.Column(db.String(255), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+
   
 #################################################################################################################################################################################################
   
@@ -98,6 +105,38 @@ def feedback():
 def view_feedback():
     feedback_list = Feedback.query.all()  # Query all feedback entries
     return render_template('viewfeedback.html', feedback_list=feedback_list)
+
+#################################################################################################################################################################################################
+
+@tandtweb.route('/updatefund', methods=['GET', 'POST'])
+def updatefund():
+    if request.method == 'POST':
+        # Get the form data
+        amount = float(request.form['amount'])
+        purpose = request.form['purpose']
+        action = request.form['action']
+        
+        # Adjust the amount if the action is 'subtract'
+        if action == 'subtract':
+            amount = -amount  # Make the amount negative for subtraction
+        
+        # Create a new transaction record
+        new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose)
+        db.session.add(new_transaction)
+        db.session.commit()
+        
+        # Flash a success message with updated total balance
+        total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
+        flash(f'Fund {action}ed successfully! Total Balance: ${total_balance:.2f}', 'success')
+    
+    # Calculate the total balance on each request
+    total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
+    
+    # Get all transactions for display
+    transactions = Money.query.all()
+    
+    return render_template('fund.html', transactions=transactions, total_balance=total_balance)
+
 #################################################################################################################################################################################################
 
 @tandtweb.route('/addprod', methods=['GET', 'POST'])
