@@ -178,7 +178,10 @@ def loginadmin():
         
         #only this id can login as admin
         admin_access = {
-            '1211111953': 'shah'
+            '1211111953': 'shah',
+            '1211109514': 'ami',
+            '1211109601': 'batrisya',
+            '1211108832': 'natasha'
         }
 
         if adminusername in admin_access and adminpassword == admin_access[adminusername]:
@@ -200,7 +203,10 @@ def logincourier():
         
         #only this id can login as courier
         courier_access = {
-            '1211111953': 'shah'
+            '1211111953': 'shah',
+            '1211109514': 'ami',
+            '1211109601': 'batrisya',
+            '1211108832': 'natasha'
         }
 
         if courierusername in courier_access and courierpassword == courier_access[courierusername]:
@@ -220,7 +226,10 @@ def loginsponsor():
         
         #only this id can login as sponsor
         sponsor_access = {
-            '1211111953': 'shah'
+            '1211111953': 'shah',
+            '1211109514': 'ami',
+            '1211109601': 'batrisya',
+            '1211108832': 'natasha'
         }
 
         if sponsorusername in sponsor_access and sponsorpassword == sponsor_access[sponsorusername]:
