@@ -4,7 +4,7 @@ import sqlite3
 c = sqlite3.connect('database.sqlite3')
 
 # Correct DELETE query
-c.execute("DELETE FROM Product where productprice=50")
+c.execute("DELETE FROM Money where type='Subtract'")
 
 # Commit the changes
 c.commit()
