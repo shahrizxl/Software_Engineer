@@ -5,7 +5,7 @@ import sqlite3
 c = sqlite3.connect('database.sqlite3')
 
 # Correct DELETE query
-c.execute("CREATE TABLE Feedback (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,email TEXT NOT NULL UNIQUE,ph TEXT NOT NULL UNIQUE,content TEXT NOT NULL,date DATETIME DEFAULT CURRENT_TIMESTAMP);")
+c.execute("CREATE TABLE Cart ( id INTEGER PRIMARY KEY, customer_id STRING NOT NULL, product_id INTEGER NOT NULL, quantity INTEGER NOT NULL, date_added DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (customer_id) REFERENCES Customer (id) , FOREIGN KEY (product_id) REFERENCES Product (id) );")
 
 # Commit the changes
 c.commit()
