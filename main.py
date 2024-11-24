@@ -219,9 +219,8 @@ def add_product():
         if image:
             filename = secure_filename(image.filename)
             mimetype = image.mimetype
-            image_data = image.read()  # Read the binary data
+            image_data = image.read()  
             
-            # Create a new Product instance
             new_product = Product(
                 id=id,
                 productname=productname,
@@ -231,24 +230,21 @@ def add_product():
                 picture_mimetype=mimetype
             )
             
-            # Save to the database
             db.session.add(new_product)
             db.session.commit()
             
-            return render_template('add_product.html')  # Redirect to the same page or another
+            return render_template('add_product.html')  
 
     return render_template('add_product.html')
   
 
 @tandtweb.route('/products', methods=['GET'])
 def view_products():
-    # Fetch all products from the database
     products = Product.query.all()
     return render_template('view_products.html', products=products)
 
 @tandtweb.route('/products2', methods=['GET'])
 def customerproduct():
-    # Fetch all products from the database
     products = Product.query.all()
     return render_template('customerproduct.html', products=products)
 
@@ -261,7 +257,6 @@ def edit_product(product_id):
         return render_template('view_products.html', products=Product.query.all())
 
     if request.method == 'POST':
-        # Get updated data from form
         product.productname = request.form['productname']
         product.productprice = float(request.form['productprice'])
         product.productstock = int(request.form['productstock'])
@@ -280,18 +275,15 @@ def edit_product(product_id):
 
 @tandtweb.route('/deleteproduct/<int:product_id>', methods=['POST', 'GET'])
 def delete_product(product_id):
-    # Fetch the product by ID
     product = Product.query.get(product_id)
     
     if product:
-        # Delete the product from the database
         db.session.delete(product)
         db.session.commit()
         flash('Product deleted successfully!', 'success')
     else:
         flash('Product not found.', 'error')
 
-    # Fetch the updated list of products after deletion
     products = Product.query.all()
     return render_template('view_products.html', products=products)
 
