@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,session,flash
+from flask import Flask,render_template,request,session,flash,redirect
 from werkzeug.utils import secure_filename
 from werkzeug.exceptions import abort
 
@@ -39,7 +39,7 @@ def b64encode_filter(value):
 
 class customer(db.Model,UserMixin):
   id=db.Column(db.Integer, primary_key=True)
-  name=db.Column(db.String(150),unique=True)
+  name=db.Column(db.String(150))
   password=db.Column(db.String(150))
   email=db.Column(db.String(100),unique=True)
   ph=db.Column(db.String(150),unique=True)
@@ -72,25 +72,101 @@ class Money(db.Model):
     purpose = db.Column(db.String(255), nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
-  
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)  
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Foreign key to the Customer table
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)  # Foreign key to the Product table
+    quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
+    date_added = db.Column(db.DateTime, default=datetime.utcnow)  # Date when the item was added to the cart
+    customer = db.relationship('customer', backref=db.backref('cart_items', lazy=True))
+    product = db.relationship('Product', backref=db.backref('cart_items', lazy=True))
+
+#################################################################################################################################################################################################
+@tandtweb.route('/removefromcart/<int:item_id>', methods=['POST'])
+def remove_from_cart(item_id):
+    cart_item = Cart.query.get(item_id)
+    
+    if cart_item:
+        product = cart_item.product
+        product.productstock += cart_item.quantity
+        db.session.delete(cart_item)
+        db.session.commit()
+        flash('Item removed from cart, quantity updated back to stock!', 'success')
+    else:
+        flash('Item not found in the cart.', 'error')
+    return redirect('/cart')
+
+
+
+@tandtweb.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'])
+def add_to_cart(product_id):
+    customer_id = session.get('user_id')
+    if not customer_id:
+        flash('Please log in to add products to your cart.', 'error')
+        return redirect('/customer')  
+
+    try:
+        quantity = int(request.form['quantity'])
+        if quantity < 1:
+            flash('Quantity must be at least 1.', 'error')
+            return redirect('/products2')
+    except (KeyError, ValueError):
+        flash('Invalid quantity.', 'error')
+        return redirect('/products2')
+
+    product = Product.query.get(product_id)
+    if not product:
+        flash('Product not found.', 'error')
+        return redirect('/products2')
+    if product.productstock < quantity:
+        flash('Not enough stock available.', 'error')
+        return redirect('/products2')
+
+ 
+    cart_item = Cart.query.filter_by(customer_id=customer_id, product_id=product_id).first()
+    if cart_item:
+       
+        cart_item.quantity += quantity
+    else:
+       
+        cart_item = Cart(customer_id=customer_id, product_id=product_id, quantity=quantity)
+        db.session.add(cart_item)
+   
+    product.productstock -= quantity
+    db.session.commit()
+
+    flash('Product added to cart!', 'success')
+    return redirect('/products2')
+
+
+
+@tandtweb.route('/cart', methods=['GET', 'POST'])
+def view_cart():
+    customer_id = session.get('user_id')
+    
+    cart_items = Cart.query.filter_by(customer_id=customer_id).all()
+    
+    total_price = sum(item.product.productprice * item.quantity for item in cart_items)
+    
+    return render_template('cart.html', cart_items=cart_items, total_price=total_price)
+
+
 #################################################################################################################################################################################################
   
 @tandtweb.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
-        # Get form data
         name = request.form.get('name')
         email = request.form.get('email')
         ph = request.form.get('ph')
         content = request.form.get('content')
         date = datetime.strptime(request.form['date'], '%Y-%m-%d')
 
-        # Basic server-side validation
         if not name or not email or not ph or not content:
             flash('All fields are required!', 'error')
             return render_template('feedback.html', name=name, email=email, ph=ph, content=content)
 
-        # Save feedback (allow duplicates)
         new_feedback = Feedback(name=name, email=email, ph=ph, content=content)
         db.session.add(new_feedback)
         db.session.commit()
@@ -98,12 +174,11 @@ def feedback():
         flash('Thank you for your feedback!', 'success')
         return render_template('feedback.html')
 
-    # Render feedback form on GET request
     return render_template('feedback.html')
 
 @tandtweb.route('/viewfeedback', methods=['GET'])
 def view_feedback():
-    feedback_list = Feedback.query.all()  # Query all feedback entries
+    feedback_list = Feedback.query.all()  
     return render_template('viewfeedback.html', feedback_list=feedback_list)
 
 #################################################################################################################################################################################################
@@ -111,28 +186,21 @@ def view_feedback():
 @tandtweb.route('/updatefund', methods=['GET', 'POST'])
 def updatefund():
     if request.method == 'POST':
-        # Get the form data
         amount = float(request.form['amount'])
         purpose = request.form['purpose']
         action = request.form['action']
         
-        # Adjust the amount if the action is 'subtract'
         if action == 'subtract':
-            amount = -amount  # Make the amount negative for subtraction
+            amount = -amount  
         
-        # Create a new transaction record
         new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose)
         db.session.add(new_transaction)
         db.session.commit()
         
-        # Flash a success message with updated total balance
         total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
         flash(f'Fund {action}ed successfully! Total Balance: ${total_balance:.2f}', 'success')
     
-    # Calculate the total balance on each request
     total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
-    
-    # Get all transactions for display
     transactions = Money.query.all()
     
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
@@ -177,6 +245,56 @@ def view_products():
     # Fetch all products from the database
     products = Product.query.all()
     return render_template('view_products.html', products=products)
+
+@tandtweb.route('/products2', methods=['GET'])
+def customerproduct():
+    # Fetch all products from the database
+    products = Product.query.all()
+    return render_template('customerproduct.html', products=products)
+
+
+@tandtweb.route('/editproduct/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+    product = Product.query.get(product_id)
+    if not product:
+        flash('Product not found.', 'error')
+        return render_template('view_products.html', products=Product.query.all())
+
+    if request.method == 'POST':
+        # Get updated data from form
+        product.productname = request.form['productname']
+        product.productprice = float(request.form['productprice'])
+        product.productstock = int(request.form['productstock'])
+        image = request.files['productpicture']
+        
+        if image:
+            product.productpicture = image.read()
+            product.picture_mimetype = image.mimetype
+
+        db.session.commit()
+        flash('Product updated successfully!', 'success')
+        return render_template('view_products.html', products=Product.query.all())
+
+    return render_template('edit_product.html', product=product)
+
+
+@tandtweb.route('/deleteproduct/<int:product_id>', methods=['POST', 'GET'])
+def delete_product(product_id):
+    # Fetch the product by ID
+    product = Product.query.get(product_id)
+    
+    if product:
+        # Delete the product from the database
+        db.session.delete(product)
+        db.session.commit()
+        flash('Product deleted successfully!', 'success')
+    else:
+        flash('Product not found.', 'error')
+
+    # Fetch the updated list of products after deletion
+    products = Product.query.all()
+    return render_template('view_products.html', products=products)
+
 
 #################################################################################################################################################################################################
 #Log in & sign up
