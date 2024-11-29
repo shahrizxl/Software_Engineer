@@ -5,11 +5,12 @@ c = sqlite3.connect('database.sqlite3')
 
 # Correct CREATE TABLE query (comments removed)
 c.execute("""
-CREATE TABLE Notification (
+          
+CREATE TABLE Notificationcourier (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    customer_id INTEGER NOT NULL,
-    content TEXT NOT NULL,  
-    FOREIGN KEY (customer_id) REFERENCES Customer(id)
+
+    content TEXT NOT NULL  
+
 );
 
 

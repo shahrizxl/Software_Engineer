@@ -60,6 +60,16 @@ class Notification(db.Model, UserMixin):
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Link to customer
     content = db.Column(db.String(1500), nullable=False)
     customer = db.relationship('customer', backref=db.backref('notification', lazy=True))
+    
+    
+class Notificationsponsor(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(1500), nullable=False)
+    
+class Notificationcourier(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(1500), nullable=False)
+    
 
 
 class Product(db.Model):
@@ -268,6 +278,40 @@ def noticus():
 
     return render_template('viewnoticus.html', noti=noti)
        
+       
+       
+@tandtweb.route('/snspo', methods=['GET', 'POST'])
+def notispo():
+    if request.method == 'POST':
+        content = request.form.get('content')
+
+        new_noti = Notificationsponsor(content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sendnotispo.html')
+
+@tandtweb.route('/viewnotispo', methods=['GET'])
+def viewnotispo():
+    noti_list = Notificationsponsor.query.all()  
+    return render_template('viewnotispo.html', noti_list=noti_list)
+
+
+@tandtweb.route('/sncou', methods=['GET', 'POST'])
+def noticou():
+    if request.method == 'POST':
+        content = request.form.get('content')
+
+        new_noti = Notificationcourier(content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sendnoticou.html')
+
+@tandtweb.route('/viewnoticou', methods=['GET'])
+def viewnoticou():
+    noti_list = Notificationcourier.query.all()  
+    return render_template('viewnoticou.html', noti_list=noti_list)
     
 #################################################################################################################################################################################################
 
@@ -297,6 +341,11 @@ def feedback():
 def view_feedback():
     feedback_list = Feedback.query.all()  
     return render_template('viewfeedback.html', feedback_list=feedback_list)
+
+@tandtweb.route('/viewfeedbackspon', methods=['GET'])
+def view_feedbackspon():
+    feedback_list = Feedback.query.all()  
+    return render_template('viewfeedbackspon.html', feedback_list=feedback_list)
 
 #################################################################################################################################################################################################
 
