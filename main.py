@@ -71,12 +71,16 @@ class Money(db.Model):
     amount = db.Column(db.Float, nullable=False)
     purpose = db.Column(db.String(255), nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
+        
     
 class Delivery(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Link to customer
     delivery_status = db.Column(db.String(50), default="Pending")
     expected_delivery_date = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(255), nullable=False)
+    customer = db.relationship('customer', backref=db.backref('deliveries', lazy=True))
+
 
 
 class Cart(db.Model):
@@ -110,7 +114,7 @@ def checkout():
     db.session.add(new_transaction)
     
     # Create a new delivery entry
-    new_delivery = Delivery(address=address_)  
+    new_delivery = Delivery(address=address_,customer_id=customer_id,expected_delivery_date='TBA')  
     db.session.add(new_delivery)
     
     # Create a new ItemPaid entry for each cart item
@@ -261,8 +265,9 @@ def view_feedback():
 
 @tandtweb.route('/fundsale', methods=['GET'])
 def view_sale():
-    transactions = Money.query.all()
+    transactions = Money.query.filter(Money.purpose == 'Payment for items').all()
     return render_template('fundsale.html', transactions=transactions)
+
 
 @tandtweb.route('/viewdel', methods=['GET'])
 def view_del():
@@ -273,6 +278,25 @@ def view_del():
 def view_delivery():
     delivery_list = Delivery.query.all()
     return render_template('viewdelivery.html', delivery_list=delivery_list)
+
+@tandtweb.route('/viewdelcus', methods=['GET'])
+def delivery_detail():
+    # Ensure the user is logged in
+    customer_id = session.get('user_id')
+    if not customer_id:
+        flash('Please log in to view your delivery details.', 'error')
+        return redirect('/customer')
+
+    # Fetch delivery details associated with the customer
+    deliveries = Delivery.query.filter_by(customer_id=customer_id).all()
+
+    # If no deliveries are found
+    if not deliveries:
+        flash('No delivery details found.', 'info')
+        return redirect('/customerhome')
+
+    return render_template('viewdelcus.html', deliveries=deliveries)
+
 
 @tandtweb.route('/editdel/<int:delivery_id>', methods=['GET', 'POST'])
 def edit_delivery(delivery_id):
@@ -311,7 +335,6 @@ def view_cus():
 def delete_customer(customer_id):
     customer_to_delete = customer.query.get(customer_id)
     if customer_to_delete:
-        # Delete related cart entries first
         Cart.query.filter_by(customer_id=customer_id).delete()
         db.session.delete(customer_to_delete)
         db.session.commit()
