@@ -55,7 +55,13 @@ class Feedback(db.Model, UserMixin):
     content = db.Column(db.String(1500), nullable=False)
     date=db.Column(db.DateTime(),default=datetime.utcnow)
     
-    
+class Notification(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Link to customer
+    content = db.Column(db.String(1500), nullable=False)
+    customer = db.relationship('customer', backref=db.backref('notification', lazy=True))
+
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the product
     productname = db.Column(db.String(150), nullable=False)
