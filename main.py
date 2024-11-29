@@ -375,22 +375,47 @@ def purchased_items():
 
 @tandtweb.route('/refund/<int:item_id>', methods=['GET', 'POST'])
 def refund_form(item_id):
-    # Fetch the purchased item
     purchased_item = purchaseditem.query.get_or_404(item_id)
 
     if request.method == 'POST':
-        # Handle the refund reason submission
         refund_reason = request.form.get('reason')
         purchased_item.refund_reason = refund_reason
         purchased_item.refund_status = 'Refund Requested'
         db.session.commit()
         flash('Refund request submitted successfully.', 'success')
-        return render_template('customerhome.html')  # Update route name if needed
+        return render_template('customerhome.html')  
 
-    # Render the refund form with dynamic content
     return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
 
 
+@tandtweb.route('/viewref', methods=['GET'])
+def view_purchased_items():
+    purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
+    return render_template('viewref.html', purchased_items=purchased_items)
+
+
+@tandtweb.route('/accept/<int:item_id>', methods=['GET', 'POST'])
+def accept_refund(item_id):
+    purchased_item = purchaseditem.query.get_or_404(item_id)
+    
+    purchased_item.refund_status = 'Refund Accepted'
+    
+    new_transaction = Money(type='Subtract', amount=purchased_item.totalprice, purpose='Refund')
+    db.session.add(new_transaction)
+    
+    db.session.commit()
+    flash('Refund request accepted.', 'success')
+    return redirect('/viewref')  
+
+@tandtweb.route('/reject/<int:item_id>', methods=['GET', 'POST'])
+def reject_refund(item_id):
+    purchased_item = purchaseditem.query.get_or_404(item_id)
+    
+    purchased_item.refund_status = 'Refund Rejected'
+    
+    db.session.commit()
+    flash('Refund request rejected.', 'danger')
+    return redirect('/viewref')  
 
 
 #################################################################################################################################################################################################
