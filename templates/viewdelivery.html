@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Delivery</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Delivery</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>Expected Delivery</th>
+                <th>Delivery Status</th>
+               
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for Delivery in delivery_list %}
+                <tr>
+                    <td>{{ Delivery.id }}</td>
+                    <td>{{ Delivery.address }}</td>
+                    <td>{{ Delivery.expected_delivery_date }}</td>
+                    <td>{{ Delivery.delivery_status }}</td>
+                
+                 
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.location.href='/adminhome'">Back</button>
+</body>
+</html>

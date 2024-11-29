@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+    {% if cart_items %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.productname }}</td>
+                        <td>RM {{ item.product.productprice }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>RM {{ item.product.productprice * item.quantity }}</td>
+                        <td>
+                            <form action="/removefromcart/{{ item.id }}" method="POST" style="display:inline;">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Total: RM {{ total_price }}</h3>
+
+        <!-- Checkout Form -->
+        <form method="POST" action="{{ url_for('checkout') }}">
+            <h3>Cart Summary</h3>
+            {% for item in cart_items %}
+                <p>{{ item.product.productname }} - RM {{ item.product.productprice }} x {{ item.quantity }}</p>
+            {% endfor %}
+            <p>Total: RM {{ total_price }}</p>
+
+            <!-- Address Input -->
+            <label for="address">Delivery Address:</label>
+            <textarea id="address" name="address" rows="4" cols="50" required placeholder="Enter your address"></textarea>
+            <br><br>
+
+            <button type="submit">Proceed to Checkout</button>
+        </form>
+
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+
+    <button onclick="window.location.href='/products2'">Continue Shopping</button>
+</body>
+</html>
