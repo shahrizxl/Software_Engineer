@@ -240,6 +240,37 @@ def view_cart():
 
 #################################################################################################################################################################################################
   
+@tandtweb.route('/sncus', methods=['GET', 'POST'])
+def noti():
+    if request.method == 'POST':
+        content = request.form.get('content')
+        customer_id = request.form.get('customer_id')
+    
+        new_noti = Notification(customer_id=customer_id, content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sendnoticus.html')
+
+@tandtweb.route('/noticus', methods=['GET'])
+def noticus():
+    customer_id = session.get('user_id')
+    
+    if not customer_id:
+        flash('Please log in to view your notification details.', 'error')
+        return redirect('/customer')
+    
+    noti = Notification.query.filter_by(customer_id=customer_id).all()
+
+    if not noti:
+        flash('No notification details found.', 'info')
+        return redirect('/customerhome')
+
+    return render_template('viewnoticus.html', noti=noti)
+       
+    
+#################################################################################################################################################################################################
+
 @tandtweb.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
@@ -287,16 +318,13 @@ def view_delivery():
 
 @tandtweb.route('/viewdelcus', methods=['GET'])
 def delivery_detail():
-    # Ensure the user is logged in
     customer_id = session.get('user_id')
     if not customer_id:
         flash('Please log in to view your delivery details.', 'error')
         return redirect('/customer')
 
-    # Fetch delivery details associated with the customer
     deliveries = Delivery.query.filter_by(customer_id=customer_id).all()
 
-    # If no deliveries are found
     if not deliveries:
         flash('No delivery details found.', 'info')
         return redirect('/customerhome')

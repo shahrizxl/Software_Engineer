@@ -5,14 +5,13 @@ c = sqlite3.connect('database.sqlite3')
 
 # Correct CREATE TABLE query (comments removed)
 c.execute("""
-CREATE TABLE Delivery (
+CREATE TABLE Notification (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_id INTEGER NOT NULL,
-    delivery_status TEXT DEFAULT 'Pending',
-    expected_delivery_date TEXT DEFAULT 'TBA',
-    address TEXT NOT NULL,
+    content TEXT NOT NULL,  
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
+
 
 """)
 
