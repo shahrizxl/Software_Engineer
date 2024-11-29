@@ -107,6 +107,21 @@ class Cart(db.Model):
     date_added = db.Column(db.DateTime, default=datetime.utcnow)  # Date when the item was added to the cart
     customer = db.relationship('customer', backref=db.backref('cart_items', lazy=True))
     product = db.relationship('Product', backref=db.backref('cart_items', lazy=True))
+    
+class purchaseditem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Foreign key to the Customer table
+    customer = db.relationship('customer', backref=db.backref('purchased_items', lazy=True))
+    
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)  # Foreign key to the Product table
+    product = db.relationship('Product', backref=db.backref('purchased_items', lazy=True))
+    
+    totalprice = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
+    refund_status = db.Column(db.String(50), default="Pending")
+    refund_reason = db.Column(db.String(100), nullable=True)
+
+
 
 #################################################################################################################################################################################################
 
@@ -123,7 +138,10 @@ def checkout():
         flash('Your cart is empty!', 'error')
         return redirect('/cart')
     
+   
+    
     total_price = sum(item.product.productprice * item.quantity for item in cart_items)
+
     
     # Update the Money table for the transaction
     new_transaction = Money(type='Add', amount=total_price, purpose='Payment for items')
@@ -133,10 +151,9 @@ def checkout():
     new_delivery = Delivery(address=address_,customer_id=customer_id,expected_delivery_date='TBA')  
     db.session.add(new_delivery)
     
-    # Create a new ItemPaid entry for each cart item
-    # for item in cart_items:
-    #     item_paid = ItemPaid(id=customer_id,order_id=item.id, delivery_id=new_delivery.id, total_price=item.product.productprice * item.quantity)
-    #     db.session.add(item_paid)
+    for item in cart_items:
+        purchased_item = purchaseditem(customer_id=customer_id,product_id=item.product.id, totalprice=item.product.productprice * item.quantity, quantity=item.quantity, refund_status='Pending')
+        db.session.add(purchased_item)
     
     # Clear the cart after successful checkout
     for item in cart_items:
@@ -348,6 +365,36 @@ def view_feedbackspon():
     return render_template('viewfeedbackspon.html', feedback_list=feedback_list)
 
 #################################################################################################################################################################################################
+@tandtweb.route('/purchaseditems')
+def purchased_items():
+    customer_id = session.get('user_id')
+    
+    purchased_items = purchaseditem.query.filter_by(customer_id=customer_id).all()
+    return render_template('purchaseditem.html', purchased_items=purchased_items)
+
+
+@tandtweb.route('/refund/<int:item_id>', methods=['GET', 'POST'])
+def refund_form(item_id):
+    # Fetch the purchased item
+    purchased_item = purchaseditem.query.get_or_404(item_id)
+
+    if request.method == 'POST':
+        # Handle the refund reason submission
+        refund_reason = request.form.get('reason')
+        purchased_item.refund_reason = refund_reason
+        purchased_item.refund_status = 'Refund Requested'
+        db.session.commit()
+        flash('Refund request submitted successfully.', 'success')
+        return render_template('customerhome.html')  # Update route name if needed
+
+    # Render the refund form with dynamic content
+    return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
+
+
+
+
+#################################################################################################################################################################################################
+
 
 @tandtweb.route('/fundsale', methods=['GET'])
 def view_sale():

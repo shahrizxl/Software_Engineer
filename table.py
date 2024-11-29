@@ -5,7 +5,7 @@ import sqlite3
 c = sqlite3.connect('database.sqlite3')
 
 # Correct DELETE query
-c.execute("DROP TABLE Delivery")
+c.execute("DROP TABLE purchaseditem")
 
 # Commit the changes
 c.commit()
