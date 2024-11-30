@@ -501,26 +501,33 @@ def delete_customer(customer_id):
     return render_template('viewcustomer.html', customers=customers)
 
 #################################################################################################################################################################################################
-
 @tandtweb.route('/updatefund', methods=['GET', 'POST'])
 def updatefund():
     if request.method == 'POST':
         amount = float(request.form['amount'])
         purpose = request.form['purpose']
-        action = request.form['action']
+        action = request.form['action'].lower()  # 'add' or 'subtract'
         
-        if action == 'subtract':
-            amount = -amount  
+        # Ensure action is valid
+        if action not in ['add', 'subtract']:
+            flash('Invalid action. Please choose "Add" or "Subtract".', 'error')
+            return redirect('/updatefund')
         
+        # Create a new transaction
         new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose)
         db.session.add(new_transaction)
         db.session.commit()
         
-        total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
-        # flash(f'Fund {action}ed successfully! Total Balance: ${total_balance:.2f}', 'success')
+        # Flash success message
+        # flash(f'Funds {action}ed successfully!', 'success')
     
-    total_balance = db.session.query(db.func.sum(Money.amount)).scalar() or 0
+    # Calculate total balance
     transactions = Money.query.all()
+    total_balance = sum(
+        transaction.amount if transaction.type == 'Add' 
+        else -transaction.amount
+        for transaction in transactions
+    )
     
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
 

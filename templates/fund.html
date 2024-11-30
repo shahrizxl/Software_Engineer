@@ -43,7 +43,13 @@
             {% for transaction in transactions %}
             <tr>
                 <td>{{ transaction.type }}</td>
-                <td>RM {{ "{:,.2f}".format(transaction.amount) }}</td>
+                <td>
+                    {% if transaction.type == 'Add' %}
+                        RM {{ "%.2f" | format(transaction.amount) }}
+                    {% else %}
+                        RM {{ "-%.2f" | format(transaction.amount) }}
+                    {% endif %}
+                </td>
                 <td>{{ transaction.purpose }}</td>
                 <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
             </tr>
