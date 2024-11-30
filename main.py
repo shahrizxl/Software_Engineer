@@ -164,35 +164,6 @@ def checkout():
     # flash('Checkout successful! Your order is being processed.', 'success')
     return redirect('/customerhome')  # Redirect to customer home or order summary page
 
-
-# @tandtweb.route('/checkout', methods=['POST'])
-# def checkout():
-#     if request.method == 'POST':
-#         address_ = request.form.get('address')
-    
-#     customer_id = session.get('user_id')
-    
-#     cart_items = Cart.query.filter_by(customer_id=customer_id).all()
-#     if not cart_items:
-#         flash('Your cart is empty!', 'error')
-#         return redirect('/cart')
-    
-#     total_price = sum(item.product.productprice * item.quantity for item in cart_items)
-    
-#     new_transaction = Money(type='Add', amount=total_price, purpose='Payment for items')
-#     db.session.add(new_transaction)
-    
-#     new_delivery = Delivery(address=address_)
-#     db.session.add(new_delivery)
-    
-#     for item in cart_items:
-#         db.session.delete(item)
-    
-#     db.session.commit()
-
-   
-#     return render_template('customerhome.html') 
-
 #################################################################################################################################################################################################
 
 
