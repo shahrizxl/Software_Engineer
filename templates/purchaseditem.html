@@ -18,6 +18,7 @@
                         <th>Quantity</th>
                         <th>Total Price</th>
                         <th>Refund Status</th>
+                        <th>Delivery Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                         <td>{{ item.quantity }}</td>
                         <td>${{ item.totalprice }}</td>
                         <td>{{ item.refund_status }}</td>
+                        <td>{{ item.delivery_status }}</td>
                         <td>
                           {% if item.refund_status == 'Pending' %}
                               <a href="{{ url_for('refund_form', item_id=item.id) }}">

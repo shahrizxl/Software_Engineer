@@ -120,12 +120,13 @@ class purchaseditem(db.Model):
     quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
     refund_status = db.Column(db.String(50), default="Pending")
     refund_reason = db.Column(db.String(100), nullable=True)
+    delivery_status = db.Column(db.String(50), default="Pending")
 
 
 
 #################################################################################################################################################################################################
 
-@tandtweb.route('/checkout', methods=['POST'])
+@tandtweb.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
         address_ = request.form.get('address')
@@ -432,14 +433,22 @@ def edit_delivery(delivery_id):
         return render_template('viewdel.html', delivery=Delivery.query.all())
 
     if request.method == 'POST':
+        # Update delivery details
         delivery.delivery_status = request.form['delivery_status']
         delivery.expected_delivery_date = request.form['expected_delivery_date']
 
+        # Update delivery_status for all associated purchased items
+        purchased_items = purchaseditem.query.filter_by(customer_id=delivery.customer_id).all()
+        for item in purchased_items:
+            item.delivery_status = delivery.delivery_status
+
+        # Commit all changes at once
         db.session.commit()
-        flash('Delivery updated successfully!', 'success')
+        flash('Delivery and associated purchased items updated successfully!', 'success')
         return render_template('courierhome.html')
 
     return render_template('edit_del.html', delivery=delivery)
+
 
 #################################################################################################################################################################################################
 
