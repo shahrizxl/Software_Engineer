@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Refund</title>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2>Request Refund for {{ product_name }}</h2>
+        
+        <form action="/refund/{{ item_id }}" method="POST">
+            <div class="form-group">
+                <label for="reason">Refund Reason:</label>
+                <textarea name="reason" id="reason" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Refund Request</button>
+        </form>
+    </div>
+
+</body>
+</html>
