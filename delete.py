@@ -13,7 +13,6 @@ CREATE TABLE purchaseditem (
     totalprice FLOAT NOT NULL,            
     quantity INTEGER NOT NULL,             
     refund_status VARCHAR(50) DEFAULT 'Pending',
-    delivery_status VARCHAR(50) DEFAULT 'Pending',
     refund_reason VARCHAR(100),  
     FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE

@@ -11,7 +11,13 @@
 
     <form method="POST" enctype="multipart/form-data">
         <label for="delivery_status">Delivery Status:</label>
-        <input type="text" id="delivery_status" name="delivery_status" value="{{ delivery.delivery_status }}" required><br><br>
+        <select id="delivery_status" name="delivery_status" required>
+            <option value="Out for Delivery" {% if delivery.delivery_status == 'Out for Delivery' %}selected{% endif %}>Out for Delivery</option>
+            <option value="Refunded" {% if delivery.delivery_status == 'Refunded' %}selected{% endif %}>Refunded</option>
+            <option value="Delivered" {% if delivery.delivery_status == 'Delivered' %}selected{% endif %}>Delivered</option>
+            <option value="Pending" {% if delivery.delivery_status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="In Process" {% if delivery.delivery_status == 'In Process' %}selected{% endif %}>In Process</option>
+        </select><br><br>
         
         <label for="expected_delivery_date">Expected Delivery:</label>
         

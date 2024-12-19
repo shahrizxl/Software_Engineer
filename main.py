@@ -120,7 +120,6 @@ class purchaseditem(db.Model):
     quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
     refund_status = db.Column(db.String(50), default="Pending")
     refund_reason = db.Column(db.String(100), nullable=True)
-    delivery_status = db.Column(db.String(50), default="Pending")
 
 
 
@@ -361,9 +360,14 @@ def refund_form(item_id):
 
 
 @tandtweb.route('/viewref', methods=['GET'])
-def view_purchased_items():
+def view_ref():
     purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
     return render_template('viewref.html', purchased_items=purchased_items)
+
+@tandtweb.route('/viewrefund', methods=['GET'])
+def view_refund():
+    purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
+    return render_template('viewrefund.html', purchased_items=purchased_items)
 
 
 @tandtweb.route('/accept/<int:item_id>', methods=['GET', 'POST'])
@@ -437,10 +441,6 @@ def edit_delivery(delivery_id):
         delivery.delivery_status = request.form['delivery_status']
         delivery.expected_delivery_date = request.form['expected_delivery_date']
 
-        # Update delivery_status for all associated purchased items
-        purchased_items = purchaseditem.query.filter_by(customer_id=delivery.customer_id).all()
-        for item in purchased_items:
-            item.delivery_status = delivery.delivery_status
 
         # Commit all changes at once
         db.session.commit()
