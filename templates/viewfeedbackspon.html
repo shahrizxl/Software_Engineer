@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Feedback</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Feedback</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Content</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for feedback in feedback_list %}
+                <tr>
+                    <td>{{ feedback.id }}</td>
+                    <td>{{ feedback.name }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.ph }}</td>
+                    <td>{{ feedback.content }}</td>
+                    <td>{{ feedback.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.location.href='/sponsorhome'">Back</button>
+</body>
+</html>

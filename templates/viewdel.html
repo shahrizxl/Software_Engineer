@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Deliveries</title>
+
+</head>
+<body>
+    <h1>All Deliveries</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>Expected Delivery</th>
+                <th>Delivery Status</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in delivery_list %}
+                <tr>
+                    <td>{{ delivery.id }}</td>
+                    <td>{{ delivery.address }}</td>
+                    <td>{{ delivery.expected_delivery_date }}</td>
+                    <td>{{ delivery.delivery_status }}</td>
+                    <td>
+
+                        <form action="/editdel/{{ delivery.id}}" method="GET" style="display: inline;">
+                            <button type="submit">Edit</button>
+                        </form>
+
+                        <form action="/deletedelivery/{{ delivery.id }}" method="POST" style="display: inline;" 
+                        onsubmit="return confirm('Are you sure you want to delete this delivery?')">
+                      <button type="submit" >Delete</button>
+                  </form>
+
+                        
+                    </td>
+
+            
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.location.href='/courierhome'">Back</button>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Details</title>
+</head>
+<body>
+    <h1>Your Notifications</h1>
+
+    {% if noti %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Notification ID</th>
+                    <th>Content</th>
+              
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in noti %}
+                    <tr>
+                        <td>{{ notification.id }}</td>
+                        <td>{{ notification.content }}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No notifications available.</p>
+    {% endif %}
+
+    <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+
+</body>
+</html>
