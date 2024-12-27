@@ -109,7 +109,11 @@ button {
   font-weight: bold;
   margin: 20px;
   color: #fff;
+<<<<<<< HEAD
   background: linear-gradient(135deg, #699cc4, #7b99c5);
+=======
+  background: linear-gradient(135deg, #007BFF, #0056b3);
+>>>>>>> 88ee59865b92aae38d9e05bda407a4a5cf309feb
   border: none;
   border-radius: 8px;
   cursor: pointer;
