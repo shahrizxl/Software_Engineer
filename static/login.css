@@ -36,7 +36,7 @@ body {
 
 /* Login Section */
 section.color {
-  background-color: #ffffff;
+  background-color: #221f1f;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-width: 400px;
@@ -47,8 +47,9 @@ section.color {
 
 h1 {
   font-size: 24px;
-  color: #007BFF;
-  margin-bottom: 20px;
+  color: #ff00b3;
+  margin-bottom: 50px;
+  margin-top: -60px; 
 }
 
 form {
@@ -62,7 +63,7 @@ label {
   text-align: left;
   display: inline-block;
   margin-bottom: 5px;
-  color: #555;
+  color: #e8dcdc;
 }
 
 input {
@@ -84,7 +85,7 @@ button {
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #ff00b3;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -92,7 +93,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #ffa7e4;
   transform: translateY(-2px);
 }
 
