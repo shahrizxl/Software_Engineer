@@ -8,6 +8,10 @@ body, html {
   color: #333;
 }
 
+body.homebody{
+  background-color: #ece6dd;
+}
+
 /* Body Styling */
 body {
   display: flex;
@@ -109,11 +113,11 @@ button {
   font-weight: bold;
   margin: 20px;
   color: #fff;
-<<<<<<< HEAD
+
   background: linear-gradient(135deg, #699cc4, #7b99c5);
-=======
-  background: linear-gradient(135deg, #007BFF, #0056b3);
->>>>>>> 88ee59865b92aae38d9e05bda407a4a5cf309feb
+
+  background: linear-gradient(135deg, #816c4d, #8f7855);
+
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -123,7 +127,7 @@ button {
 
 button:hover {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, #0056b3, #003d7a);
+  background: linear-gradient(135deg, #594b35, #594b35);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -135,13 +139,56 @@ button:active {
 /* Responsive Design */
 @media (max-width: 600px) {
   button {
-      width: 100%;
-      padding: 12px 20px;
-      font-size: 16px;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
   }
 
   .logo img {
-      width: 100px;
-      height: 100px;
+    width: 100px;
+    height: 100px;
   }
+}
+
+.admintop {
+  position: relative;
+  width: 100%; /* Full width of the container */
+  height: 100vh; /* Full viewport height */
+  background: url('/static/bg2.jpg') no-repeat center center;
+  background-size: cover; /* Ensures the image covers the entire section */
+  background-position: center; /* Centers the image in the section */
+  /* margin-left: -30px; */
+
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Match the width of the container */
+  height: 100%; /* Initially match the container height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  
+  color: #fff;
+  padding: 0; /* Remove padding to ensure no gap */
+  clip-path: inset(0); /* Dynamically clip the overlay to match the visible image area */
+  
+}
+.overlay h1 {
+  font-size: 3rem;
+  font-family: ITC Cheltenham, serif;
+  margin-bottom: 20px;
+}
+
+.overlay p {
+  font-size: 1.5rem;
+  font-family: Geometric 415, sans-serif;
+
+  margin-bottom: 30px;
 }

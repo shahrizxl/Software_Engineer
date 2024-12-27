@@ -39,12 +39,12 @@ body {
 h1 {
   text-align: center;
   font-size: 28px;
-  color: #007BFF;
+  color: #352a21;
   margin-bottom: 20px;
 }
 
 form {
-  background-color: #ffffff;
+  background-color: #ece6dd;
   max-width: 500px;
   margin: 0 auto;
   padding: 70px;
@@ -58,7 +58,7 @@ form {
 label {
   font-weight: bold;
   margin-bottom: 5px;
-  color: #555;
+  color: #525050;
 }
 
 input, select {
@@ -89,7 +89,7 @@ button {
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #21AD8A;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -97,16 +97,16 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #4b4d4e;
   transform: translateY(-2px);
 }
 
 button:last-of-type {
-  background-color: #6c757d;
+  background-color: #b7b2aa;
 }
 
 button:last-of-type:hover {
-  background-color: #5a6268;
+  background-color: #676158;
 }
 
 /* Footer Section */
@@ -116,6 +116,7 @@ footer {
   padding: 20px;
   color: #555;
   font-size: 14px;
+  margin-top: 40px;
 }
 
 footer p a {
