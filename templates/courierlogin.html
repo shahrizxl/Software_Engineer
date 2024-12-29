@@ -1,37 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courier Login</title>
-    <link rel="stylesheet" href="/static/login.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .container label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background: #6f7377;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .container button:hover {
+            background: #6f7377;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer a {
+            color: #4e5359;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <figure class="logo">
-        <a href="/"> <img src="/static/logo.png" style width="100px" height="100px"></a>
-     </figure>
-    <section class=color>
-    <h1>Courier Login</h1>
-    <form action="/courier" method="post">
-        <label>Username:</label>
-        <input name="username" required><br>
+    <div class="container">
+        <figure>
+            <a href="/">
+                <img src="/static/logo.png" alt="Logo" style="width: 80px; height: 80px;">
+            </a>
+        </figure>
+        <h1>Courier Login</h1>
+        <form action="/courier" method="post">
+            <label for="username">Username:</label>
+            <input id="username" name="username" type="text" required>
 
-        <label>Password:</label>
-        <input type=password name="password" required><br><br>
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password" required>
 
-        <button type="submit">Log in</button>
-          <button type="button" onclick="window.location.href='/'">Back</button>
-        
-    </form>
-</section>
-<footer>
-    <figure class="logo">
-      <img src="/static/logo.png" style width="100px" height="100px">
-     </figure>
-   <br> Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
-   <br> 40150 Shah Alam, Selangor<br>
-   <br> Tel : 03 - 7845 9898<br>
-   <br>Monday - Sunday<br>
-   <br> 8:00 am - 4:30 pm<br>
-   <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
-  </footer>
+            <button type="submit">Log In</button>
+            <button type="button" onclick="window.location.href='/'">Back</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
+           40150 Shah Alam, Selangor</p>
+        <p>Tel: 03 - 7845 9898<br>
+           Monday - Sunday: 8:00 AM - 4:30 PM</p>
+        <p>Email: <a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
+    </div>
 </body>
 </html>
