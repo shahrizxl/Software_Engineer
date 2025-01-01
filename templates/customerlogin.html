@@ -1,132 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .logo img {
-            display: block;
-            margin: 20px auto;
-            width: 100px;
-            height: 100px;
-        }
-        section.color {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        label {
-            font-size: 14px;
-            color: #555;
-            text-align: left;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100%;
-        }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .back-btn {
-            background-color: #6c757d;
-        }
-        .back-btn:hover {
-            background-color: #495057;
-        }
-        p {
-            margin: 10px 0;
-            font-size: 14px;
-        }
-        p a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        p a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #555;
-        }
-        footer img {
-            width: 80px;
-            height: 80px;
-        }
-        footer p a {
-            color: #007bff;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/login.css">
 </head>
 <body>
     <figure class="logo">
-        <a href="/">
-            <img src="/static/logo.png" alt="Logo">
-        </a>
-    </figure>
-    <section class="color">
-        <h1>Customer Login</h1>
-        <form action="/customer" method="post">
-            <label for="id">ID:</label>
-            <input type="text" name="id" id="id" placeholder="Enter your ID" required>
+        <a href="/"> <img src="/static/logo.png" style width="100px" height="100px"></a>
+     </figure>
+    <section class=color>
+    <h1>Customer Login</h1>
+    <form action="/customer" method="post">
+        <label>ID:</label>
+        <input name="id" required>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <label>Password:</label>
+        <input type=password name="password" required><br>
 
-            <p><a href="/customersignup">No account? Sign up right now</a></p>
+        <p><a href="/customersignup">No account? Sign up right now</a></p>
 
-            <button type="submit">Log in</button>
-            <button type="button" class="back-btn" onclick="window.location.href='/'">Back</button>
-        </form>
-    </section>
-    <footer>
-        <figure class="logo">
-            <img src="/static/logo.png" alt="Footer Logo">
-        </figure>
-        <p>Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
-           40150 Shah Alam, Selangor</p>
-        <p>Tel: 03 - 7845 9898<br>
-           Monday - Sunday: 8:00 AM - 4:30 PM</p>
-        <p>Email: <a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
-    </footer>
+        <button type="submit">Log in</button>
+            <button type="button" onclick="window.location.href='/'">Back</button>
+        
+    </form>
+</section>
+<footer>
+    <figure class="logo">
+      <img src="/static/logo.png" style width="100px" height="100px">
+     </figure>
+   <br> Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
+   <br> 40150 Shah Alam, Selangor<br>
+   <br> Tel : 03 - 7845 9898<br>
+   <br>Monday - Sunday<br>
+   <br> 8:00 am - 4:30 pm<br>
+   <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
+  </footer>
 </body>
 </html>
