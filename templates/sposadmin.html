@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Notification</title>
+    <link rel="stylesheet" href="/static/feedback.css">
+</head>
+<body>
+    <h1>Admin Notification</h1>
+    <form action="/sposadmin" method="post">
+       
+        <label for="content">Notification:</label><br>
+        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+
+
+        <button type="submit">Submit Notification</button>
+        <button type="button" onclick="window.location.href='/sponsorhome'">Back</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Deliveries</title>
+</head>
+<body>
+    <h1>Generate tracking details</h1>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>Expected Delivery</th>
+                <th>Delivery Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in delivery_list %}
+            <tr>
+                <td>{{ delivery.id }}</td>
+                <td>{{ delivery.address }}</td>
+                <td>{{ delivery.expected_delivery_date }}</td>
+                <td>{{ delivery.delivery_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="/gtracking" method="post">
+        <label for="customer_id">Customer ID:</label>
+        <input name="customer_id" id="customer_id" required><br><br>
+
+        <label for="content">Notification:</label><br>
+        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+
+        <button type="submit">Submit Notification</button>
+    </form>
+
+    <button type="button" onclick="window.location.href='/courierhome'">Back to Courier Home</button>
+</body>
+</html>
