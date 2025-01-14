@@ -146,7 +146,7 @@ def checkout():
 
     
     # Update the Money table for the transaction
-    new_transaction = Money(type='Add', amount=total_price, purpose='Payment for items')
+    new_transaction = Money(type='Add', amount=total_price, purpose='Payment for items',date=datetime.now())
     db.session.add(new_transaction)
     
     # Create a new delivery entry
@@ -551,6 +551,7 @@ def updatefund():
         amount = float(request.form['amount'])
         purpose = request.form['purpose']
         action = request.form['action'].lower()  # 'add' or 'subtract'
+        date = datetime.strptime(request.form['date'], '%Y-%m-%d')
         
         # Ensure action is valid
         if action not in ['add', 'subtract']:
@@ -558,7 +559,7 @@ def updatefund():
             return redirect('/updatefund')
         
         # Create a new transaction
-        new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose)
+        new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose,date=date)
         db.session.add(new_transaction)
         db.session.commit()
         
