@@ -83,10 +83,10 @@ class Feedback(db.Model, UserMixin):
     
 class Notification(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))  # Link to customer
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id')) 
     content = db.Column(db.String(1500), nullable=False)
     customer = db.relationship('customer', backref=db.backref('notification', lazy=True))
-    
+
     
 class Notificationsponsor(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -101,16 +101,17 @@ class Notificationadmin(db.Model, UserMixin):
     content = db.Column(db.String(1500), nullable=False)
     
 class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the product
+    id = db.Column(db.Integer, primary_key=True)  
     productname = db.Column(db.String(150), nullable=False)
     productprice = db.Column(db.Float, nullable=False)
     productstock = db.Column(db.Integer, nullable=False)
-    productpicture = db.Column(db.LargeBinary, nullable=False)  # Stores the binary data of the image
-    picture_mimetype = db.Column(db.String(50), nullable=False)  # To store the image format (e.g., 'image/jpeg')
+    productpicture = db.Column(db.LargeBinary, nullable=False)  
+    picture_mimetype = db.Column(db.String(50), nullable=False)  
   
-class Money(db.Model):
+
+class Sales(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.String(10))  # 'Add' or 'Subtract'
+    type = db.Column(db.String(10))  
     amount = db.Column(db.Float, nullable=False)
     purpose = db.Column(db.String(255), nullable=False)
     date = db.Column(db.DateTime, default=datetime)
@@ -124,24 +125,24 @@ class Delivery(db.Model):
     address = db.Column(db.String(255), nullable=False)
     customer = db.relationship('customer', backref=db.backref('deliveries', lazy=True))
 
+
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)  
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  # Foreign key to the Customer table
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)  # Foreign key to the Product table
-    quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)  
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False) 
+    quantity = db.Column(db.Integer, nullable=False)  
     customer = db.relationship('customer', backref=db.backref('cart_items', lazy=True))
     product = db.relationship('Product', backref=db.backref('cart_items', lazy=True))
     
-class purchaseditem(db.Model):
+    
+class Checkout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))  # Foreign key to the Customer table
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'))  
     customer = db.relationship('customer', backref=db.backref('purchased_items', lazy=True))
-    
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)  # Foreign key to the Product table
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False) 
     product = db.relationship('Product', backref=db.backref('purchased_items', lazy=True))
-    
     totalprice = db.Column(db.Float, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)  # Quantity of the product
+    quantity = db.Column(db.Integer, nullable=False)  
     refund_status = db.Column(db.String(50), default="Pending")
     refund_reason = db.Column(db.String(100), nullable=True)
 
@@ -167,8 +168,8 @@ def checkout():
     total_price = sum(item.product.productprice * item.quantity for item in cart_items)
 
     
-    # Update the Money table for the transaction
-    new_transaction = Money(type='Add', amount=total_price, purpose='Payment for items',date=datetime.now())
+    # Update the Sales table for the transaction
+    new_transaction = Sales(type='Add', amount=total_price, purpose='Payment for items',date=datetime.now())
     db.session.add(new_transaction)
     
     # Create a new delivery entry
@@ -176,7 +177,7 @@ def checkout():
     db.session.add(new_delivery)
     
     for item in cart_items:
-        purchased_item = purchaseditem(customer_id=customer_id,product_id=item.product.id, totalprice=item.product.productprice * item.quantity, quantity=item.quantity, refund_status='Pending')
+        purchased_item = Checkout(customer_id=customer_id,product_id=item.product.id, totalprice=item.product.productprice * item.quantity, quantity=item.quantity, refund_status='Pending')
         db.session.add(purchased_item)
     
     # Clear the cart after successful checkout
@@ -416,7 +417,7 @@ def view_feedbackspon():
 def purchased_items():
     customer_id = session.get('user_id')
     
-    purchased_items = purchaseditem.query.filter_by(customer_id=customer_id).all()
+    purchased_items = Checkout.query.filter_by(customer_id=customer_id).all()
     return render_template('purchaseditem.html', purchased_items=purchased_items)
 
 
@@ -424,7 +425,7 @@ def purchased_items():
 #refund function
 @tandtweb.route('/refund/<int:item_id>', methods=['GET', 'POST'])
 def refund_form(item_id):
-    purchased_item = purchaseditem.query.get_or_404(item_id)
+    purchased_item = Checkout.query.get_or_404(item_id)
 
     if request.method == 'POST':
         refund_reason = request.form.get('reason')
@@ -440,23 +441,23 @@ def refund_form(item_id):
 #view refund function for courier
 @tandtweb.route('/viewref', methods=['GET'])
 def view_ref():
-    purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
+    purchased_items = Checkout.query.filter(Checkout.refund_status == 'Refund Requested').all()
     return render_template('viewref.html', purchased_items=purchased_items)
 
 #view refund function for admin
 @tandtweb.route('/viewrefund', methods=['GET'])
 def view_refund():
-    purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
+    purchased_items = Checkout.query.filter(Checkout.refund_status == 'Refund Requested').all()
     return render_template('viewrefund.html', purchased_items=purchased_items)
 
 #approve refund function
 @tandtweb.route('/accept/<int:item_id>', methods=['GET', 'POST'])
 def accept_refund(item_id):
-    purchased_item = purchaseditem.query.get_or_404(item_id)
+    purchased_item = Checkout.query.get_or_404(item_id)
     
     purchased_item.refund_status = 'Refund Accepted'
     
-    new_transaction = Money(type='Subtract', amount=purchased_item.totalprice, purpose='Refund')
+    new_transaction = Sales(type='Subtract', amount=purchased_item.totalprice, purpose='Refund')
     db.session.add(new_transaction)
     
     db.session.commit()
@@ -466,7 +467,7 @@ def accept_refund(item_id):
 #reject refund function
 @tandtweb.route('/reject/<int:item_id>', methods=['GET', 'POST'])
 def reject_refund(item_id):
-    purchased_item = purchaseditem.query.get_or_404(item_id)
+    purchased_item = Checkout.query.get_or_404(item_id)
     
     purchased_item.refund_status = 'Refund Rejected'
     
@@ -547,7 +548,7 @@ def edit_delivery(delivery_id):
 #view sale function for sponsor
 @tandtweb.route('/fundsale', methods=['GET'])
 def view_sale():
-    transactions = Money.query.filter(Money.purpose == 'Payment for items').all()
+    transactions = Sales.query.filter(Sales.purpose == 'Payment for items').all()
     return render_template('fundsale.html', transactions=transactions)
 
 #update fund function for sponsor
@@ -565,7 +566,7 @@ def updatefund():
             return redirect('/updatefund')
         
         # Create a new transaction
-        new_transaction = Money(type=action.capitalize(), amount=amount, purpose=purpose,date=date)
+        new_transaction = Sales(type=action.capitalize(), amount=amount, purpose=purpose,date=date)
         db.session.add(new_transaction)
         db.session.commit()
         
@@ -573,7 +574,7 @@ def updatefund():
         # flash(f'Funds {action}ed successfully!', 'success')
     
     # Calculate total balance
-    transactions = Money.query.all()
+    transactions = Sales.query.all()
     total_balance = sum(
         transaction.amount if transaction.type == 'Add' 
         else -transaction.amount
