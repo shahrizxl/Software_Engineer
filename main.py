@@ -100,8 +100,6 @@ class Notificationadmin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(1500), nullable=False)
     
-
-
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Unique identifier for the product
     productname = db.Column(db.String(150), nullable=False)
@@ -125,8 +123,6 @@ class Delivery(db.Model):
     expected_delivery_date = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     customer = db.relationship('customer', backref=db.backref('deliveries', lazy=True))
-
-
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)  
@@ -152,7 +148,7 @@ class purchaseditem(db.Model):
 
 
 #################################################################################################################################################################################################
-
+#checkout function
 @tandtweb.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'POST':
@@ -194,7 +190,7 @@ def checkout():
 
 #################################################################################################################################################################################################
 
-
+#delete cart function
 @tandtweb.route('/removefromcart/<int:item_id>', methods=['POST'])
 def remove_from_cart(item_id):
     cart_item = Cart.query.get(item_id)
@@ -210,7 +206,7 @@ def remove_from_cart(item_id):
     return redirect('/cart')
 
 
-
+#add to cart function
 @tandtweb.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'])
 def add_to_cart(product_id):
     customer_id = session.get('user_id')
@@ -252,7 +248,7 @@ def add_to_cart(product_id):
     return redirect('/products2')
 
 
-
+#view cart function
 @tandtweb.route('/cart', methods=['GET', 'POST'])
 def view_cart():
     customer_id = session.get('user_id')
@@ -265,7 +261,7 @@ def view_cart():
 
 
 #################################################################################################################################################################################################
-  
+#send notification function
 @tandtweb.route('/sncus', methods=['GET', 'POST'])
 def noti():
     if request.method == 'POST':
@@ -278,6 +274,7 @@ def noti():
         
     return render_template('sendnoticus.html')
 
+#send notification function to customer
 @tandtweb.route('/couscus', methods=['GET', 'POST'])
 def couscus():
     if request.method == 'POST':
@@ -290,6 +287,43 @@ def couscus():
         
     return render_template('couscus.html')
 
+#send notification function to sponsor
+@tandtweb.route('/snspo', methods=['GET', 'POST'])
+def notispo():
+    if request.method == 'POST':
+        content = request.form.get('content')
+
+        new_noti = Notificationsponsor(content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sendnotispo.html')
+
+#send notification function to admin
+@tandtweb.route('/sposadmin', methods=['GET', 'POST'])
+def sposadmin():
+    if request.method == 'POST':
+        content = request.form.get('content')
+
+        new_noti = Notificationadmin(content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sposadmin.html')
+
+#send notification function to courier
+@tandtweb.route('/sncou', methods=['GET', 'POST'])
+def noticou():
+    if request.method == 'POST':
+        content = request.form.get('content')
+
+        new_noti = Notificationcourier(content=content)
+        db.session.add(new_noti)
+        db.session.commit()
+        
+    return render_template('sendnoticou.html')
+
+#update tracking function
 @tandtweb.route('/gtracking', methods=['GET', 'POST'])
 def gtracking():
     if request.method == 'POST':
@@ -303,7 +337,8 @@ def gtracking():
     delivery_list = Delivery.query.all()
     return render_template('gtracking.html', delivery_list=delivery_list)
 
-
+##################################################################################################################################################################################################
+#view notification function for customer
 @tandtweb.route('/noticus', methods=['GET'])
 def noticus():
     customer_id = session.get('user_id')
@@ -319,61 +354,27 @@ def noticus():
         return redirect('/customerhome')
 
     return render_template('viewnoticus.html', noti=noti)
-       
-       
-       
-@tandtweb.route('/snspo', methods=['GET', 'POST'])
-def notispo():
-    if request.method == 'POST':
-        content = request.form.get('content')
 
-        new_noti = Notificationsponsor(content=content)
-        db.session.add(new_noti)
-        db.session.commit()
-        
-    return render_template('sendnotispo.html')
-
-@tandtweb.route('/sposadmin', methods=['GET', 'POST'])
-def sposadmin():
-    if request.method == 'POST':
-        content = request.form.get('content')
-
-        new_noti = Notificationadmin(content=content)
-        db.session.add(new_noti)
-        db.session.commit()
-        
-    return render_template('sposadmin.html')
-
-
+#view notification function for sponsor
 @tandtweb.route('/viewnotispo', methods=['GET'])
 def viewnotispo():
     noti_list = Notificationsponsor.query.all()  
     return render_template('viewnotispo.html', noti_list=noti_list)
 
-
-@tandtweb.route('/sncou', methods=['GET', 'POST'])
-def noticou():
-    if request.method == 'POST':
-        content = request.form.get('content')
-
-        new_noti = Notificationcourier(content=content)
-        db.session.add(new_noti)
-        db.session.commit()
-        
-    return render_template('sendnoticou.html')
-
+#view notification function for courier
 @tandtweb.route('/viewnoticou', methods=['GET'])
 def viewnoticou():
     noti_list = Notificationcourier.query.all()  
     return render_template('viewnoticou.html', noti_list=noti_list)
 
+#view notification function for admin
 @tandtweb.route('/viewnotiadmin', methods=['GET'])
 def viewnotiadmin():
     noti_list = Notificationadmin.query.all()  
     return render_template('viewnotiadmin.html', noti_list=noti_list)
-    
-#################################################################################################################################################################################################
-
+       
+##################################################################################################################################################################################################
+#feedback function for customer    
 @tandtweb.route('/feedback', methods=['GET', 'POST'])
 def feedback():
     if request.method == 'POST':
@@ -394,19 +395,23 @@ def feedback():
         flash('Thank you for your feedback!', 'success')
         return render_template('feedback.html')
 
-    return render_template('feedback.html')
+    return render_template('feedback.html')    
 
+#view feedback function for admin
 @tandtweb.route('/viewfeedback', methods=['GET'])
 def view_feedback():
     feedback_list = Feedback.query.all()  
     return render_template('viewfeedback.html', feedback_list=feedback_list)
 
+#view feedback function for sponsor
 @tandtweb.route('/viewfeedbackspon', methods=['GET'])
 def view_feedbackspon():
     feedback_list = Feedback.query.all()  
     return render_template('viewfeedbackspon.html', feedback_list=feedback_list)
 
+    
 #################################################################################################################################################################################################
+#view purchased items function
 @tandtweb.route('/purchaseditems')
 def purchased_items():
     customer_id = session.get('user_id')
@@ -415,6 +420,8 @@ def purchased_items():
     return render_template('purchaseditem.html', purchased_items=purchased_items)
 
 
+#################################################################################################################################################################################################
+#refund function
 @tandtweb.route('/refund/<int:item_id>', methods=['GET', 'POST'])
 def refund_form(item_id):
     purchased_item = purchaseditem.query.get_or_404(item_id)
@@ -430,17 +437,19 @@ def refund_form(item_id):
     return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
 
 
+#view refund function for courier
 @tandtweb.route('/viewref', methods=['GET'])
 def view_ref():
     purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
     return render_template('viewref.html', purchased_items=purchased_items)
 
+#view refund function for admin
 @tandtweb.route('/viewrefund', methods=['GET'])
 def view_refund():
     purchased_items = purchaseditem.query.filter(purchaseditem.refund_status == 'Refund Requested').all()
     return render_template('viewrefund.html', purchased_items=purchased_items)
 
-
+#approve refund function
 @tandtweb.route('/accept/<int:item_id>', methods=['GET', 'POST'])
 def accept_refund(item_id):
     purchased_item = purchaseditem.query.get_or_404(item_id)
@@ -454,6 +463,7 @@ def accept_refund(item_id):
     flash('Refund request accepted.', 'success')
     return redirect('/viewref')  
 
+#reject refund function
 @tandtweb.route('/reject/<int:item_id>', methods=['GET', 'POST'])
 def reject_refund(item_id):
     purchased_item = purchaseditem.query.get_or_404(item_id)
@@ -466,10 +476,7 @@ def reject_refund(item_id):
 
 
 #################################################################################################################################################################################################
-
-
-
-
+#delivery function
 @tandtweb.route('/deletedelivery/<int:delivery_id>', methods=['POST', 'GET'])
 def delete_delivery(delivery_id):
     delivery_to_delete = Delivery.query.get(delivery_id)
@@ -485,24 +492,19 @@ def delete_delivery(delivery_id):
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
-
-
-@tandtweb.route('/fundsale', methods=['GET'])
-def view_sale():
-    transactions = Money.query.filter(Money.purpose == 'Payment for items').all()
-    return render_template('fundsale.html', transactions=transactions)
-
-
+#view delivery function for admin
 @tandtweb.route('/viewdel', methods=['GET'])
 def view_del():
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
+#view delivery function for courier
 @tandtweb.route('/viewdelivery', methods=['GET'])
 def view_delivery():
     delivery_list = Delivery.query.all()
     return render_template('viewdelivery.html', delivery_list=delivery_list)
 
+#view delivery function for customer
 @tandtweb.route('/viewdelcus', methods=['GET'])
 def delivery_detail():
     customer_id = session.get('user_id')
@@ -518,7 +520,7 @@ def delivery_detail():
 
     return render_template('viewdelcus.html', deliveries=deliveries)
 
-
+#edit delivery function for courier
 @tandtweb.route('/editdel/<int:delivery_id>', methods=['GET', 'POST'])
 def edit_delivery(delivery_id):
     delivery = Delivery.query.get(delivery_id)
@@ -539,38 +541,16 @@ def edit_delivery(delivery_id):
 
     return render_template('edit_del.html', delivery=delivery)
 
-
 #################################################################################################################################################################################################
+#view sale function
 
+#view sale function for sponsor
+@tandtweb.route('/fundsale', methods=['GET'])
+def view_sale():
+    transactions = Money.query.filter(Money.purpose == 'Payment for items').all()
+    return render_template('fundsale.html', transactions=transactions)
 
-
-@tandtweb.route('/viewcustomer', methods=['GET'])
-def view_customer():
-    customer_list = customer.query.all()  
-    return render_template('viewcustomer.html', customer_list=customer_list)
-
-
-@tandtweb.route('/viewcus', methods=['GET'])
-def view_cus():
-    customer_list = customer.query.all()  
-    return render_template('viewcus.html', customer_list=customer_list)
-
-
-@tandtweb.route('/deletecustomer/<int:customer_id>', methods=['POST', 'GET'])
-def delete_customer(customer_id):
-    customer_to_delete = customer.query.get(customer_id)
-    if customer_to_delete:
-        Cart.query.filter_by(customer_id=customer_id).delete()
-        db.session.delete(customer_to_delete)
-        db.session.commit()
-        flash('Customer and associated cart entries deleted successfully!', 'success')
-    else:
-        flash('Customer not found.', 'error')
-
-    customers = customer.query.all()
-    return render_template('viewcustomer.html', customers=customers)
-
-#################################################################################################################################################################################################
+#update fund function for sponsor
 @tandtweb.route('/updatefund', methods=['GET', 'POST'])
 def updatefund():
     if request.method == 'POST':
@@ -603,6 +583,39 @@ def updatefund():
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
 
 
+
+
+#################################################################################################################################################################################################
+#view customer function
+@tandtweb.route('/viewcustomer', methods=['GET'])
+def view_customer():
+    customer_list = customer.query.all()  
+    return render_template('viewcustomer.html', customer_list=customer_list)
+
+#delete customer function for admin
+@tandtweb.route('/viewcus', methods=['GET'])
+def view_cus():
+    customer_list = customer.query.all()  
+    return render_template('viewcus.html', customer_list=customer_list)
+
+#delete customer function for admin
+@tandtweb.route('/deletecustomer/<int:customer_id>', methods=['POST', 'GET'])
+def delete_customer(customer_id):
+    customer_to_delete = customer.query.get(customer_id)
+    if customer_to_delete:
+        Cart.query.filter_by(customer_id=customer_id).delete()
+        db.session.delete(customer_to_delete)
+        db.session.commit()
+        flash('Customer and associated cart entries deleted successfully!', 'success')
+    else:
+        flash('Customer not found.', 'error')
+
+    customers = customer.query.all()
+    return render_template('viewcustomer.html', customers=customers)
+
+#################################################################################################################################################################################################
+#product function
+#search product function for customer
 @tandtweb.route('/products', methods=['GET', 'POST'])
 def products():
     search_term = None
@@ -617,7 +630,7 @@ def products():
 
     return render_template('customerproduct.html', products=products, search_term=search_term)
 
-
+#search product function for admin
 @tandtweb.route('/product_admin', methods=['GET', 'POST'])
 def product_admin():
     search_term = None
@@ -632,10 +645,7 @@ def product_admin():
 
     return render_template('view_products.html', products=products, search_term=search_term)
 
-
-
-#################################################################################################################################################################################################
-
+#add product function for admin
 @tandtweb.route('/addprod', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
@@ -666,20 +676,20 @@ def add_product():
 
     return render_template('add_product.html')
   
-
+#view all products function for admin
 @tandtweb.route('/product_admin', methods=['GET'])
 def view_products():
     products = Product.query.all()
     return render_template('view_products.html', products=products)
 
 
-
+#view all products function for customer
 @tandtweb.route('/products2', methods=['GET'])
 def customerproduct():
     products = Product.query.all()
     return render_template('customerproduct.html', products=products)
 
-
+#edit product function for admin
 @tandtweb.route('/editproduct/<int:product_id>', methods=['GET', 'POST'])
 def edit_product(product_id):
     product = Product.query.get(product_id)
@@ -703,7 +713,7 @@ def edit_product(product_id):
 
     return render_template('edit_product.html', product=product)
 
-
+#delete product function for admin
 @tandtweb.route('/deleteproduct/<int:product_id>', methods=['POST', 'GET'])
 def delete_product(product_id):
     product = Product.query.get(product_id)
