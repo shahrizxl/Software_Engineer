@@ -46,6 +46,32 @@ class customer(db.Model,UserMixin):
   gender=db.Column(db.String(150))
   dob=db.Column(db.DateTime(),default=datetime)
   
+class admin(db.Model,UserMixin):
+  id=db.Column(db.Integer, primary_key=True)
+  name=db.Column(db.String(150))
+  password=db.Column(db.String(150))
+  email=db.Column(db.String(100),unique=True)
+  ph=db.Column(db.String(150),unique=True)
+  gender=db.Column(db.String(150))
+  dob=db.Column(db.DateTime(),default=datetime)
+
+class sponsor(db.Model,UserMixin):
+  id=db.Column(db.Integer, primary_key=True)
+  name=db.Column(db.String(150))
+  password=db.Column(db.String(150))
+  email=db.Column(db.String(100),unique=True)
+  ph=db.Column(db.String(150),unique=True)
+  gender=db.Column(db.String(150))
+  dob=db.Column(db.DateTime(),default=datetime)
+  
+class courier(db.Model,UserMixin):
+  id=db.Column(db.Integer, primary_key=True)
+  name=db.Column(db.String(150))
+  password=db.Column(db.String(150))
+  email=db.Column(db.String(100),unique=True)
+  ph=db.Column(db.String(150),unique=True)
+  gender=db.Column(db.String(150))
+  dob=db.Column(db.DateTime(),default=datetime)
   
 class Feedback(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
