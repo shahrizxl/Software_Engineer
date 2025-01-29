@@ -1,206 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shopping - Customer Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        header {
-            background: #9b9ea2;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        nav {
-            background: #333;
-            color: white;
-            padding: 10px 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        nav ul li {
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            background: #555;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-        nav ul li a:hover {
-            background: #5e646b60;
-        }
-        .main {
-            padding: 20px;
-            text-align: center;
-        }
-        .main h2 {
-            margin-bottom: 20px;
-        }
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: left;
-            width: 300px;
-        }
-        .product-card img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .product-card button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-        }
-        .product-card button:hover {
-            background: #0056b3;
-        }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 20px;
-        }
-        footer a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .product-card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            width: 200px;
-            text-align: center;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .product-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .product-card h3 {
-            font-size: 1.1em;
-            margin: 5px 0;
-        }
-        .product-card p {
-            font-size: 1em;
-            color: #007bff;
-            font-weight: bold;
-        }
-        .product-card button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .product-card button:hover {
-            background: #0056b3;
-        }
-    </style>
+    <title>Customer Home</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <figure class="logo">
+        <a href="/"> <img src="/static/1.jpg" style width="100px" height="100px"></a>
+     </figure>
+
+     <nav>
+        <ul class="topnav">
+          <li class="dropdown">
+            <a href="/products2">Shop now</a>
+          </li>
+          <li class="dropdown">
+            <a href="#managecustomer">Info</a>
+            <ul class="dropdown-content">
+              <li><a href="/purchaseditems">Purchased history</a></li>
+              <li><a href="/viewdelcus">View Delivery detail</a></li>
+            </ul>
+          </li>
+          <li><a href="/noticus">Notification</a></li>
+          <li><a href="https://wa.me/601151257919">Contact Us</a></li>
+          <li><a href="/feedback">Feedback</a></li>
+          <li><a href="/aboutus">About Us</a></li>
+          <li><a href="/logout">Log Out</a></li>
+         
+        </ul>
+      </nav>
+
 </head>
 <body>
-    <header>
-        <figure class="logo">
-            <a href="/">
-                <img src="/static/logo.png" alt="Logo" style="width: 80px; height: 80px;">
-            </a>
-        </figure>
-        <h1>Welcome to the Online Shopping Platform</h1>
-    </header>
+    <br><br>
+    
+    <section class="main" id="history"> 
+        <article>
+          <header>
+              <h2>Metro Driving Academy</h2>
+          </header>
+          <section class="picture ">
+            <img src="/static/36.webp">
+          <section class="main" id="history">
+          <h3 class="header" id="history">Metro Driving Academy</h3>
+          <p class="description">
+          
+           Established in 1998, Metro Driving Academy was licensed and awarded as the BEST DRIVING ACADEMY & 5 STAR Rated Driving Academy by the Road Transport Department of Malaysia. Comprehensively equipped with professionally built driving and riding circuit facilities, 
+           our main campuses are located in Kampung Melayu Subang (near Subang Airport) and Bandar Bukit Puchong 2. We are committed in providing the Professional Training & Best Driver’s Education services for our Local and International Candidates, with strong focus on Safe
+            Driving and observing road rules and laws at all times and in under any circumstances
+           </p>
+  
+           <h3 id="vision">OUR VISION</h3>
+           <p class="description">
+              “To be the leading driving academy in Malaysia”
+           </p>
+  
+           <h3 id="mission">OUR MISSION</h3>
+           <p class="description">
+              “To provide professional training for every driver with strong focus on safe driving and observing road rules and laws at all times and in under any circumstances”
+           </p>
+  
+           
+           <h4>The Fastest Place To Get Your Driving License</h4>
+           <section>
+              <img src="/static/pg30.webp">
+              
+             <h2>What Will You Get</h2>
+                <section class="get">
+             <div>
+              <div class="box">
+               <img src="/static/pg31.webp"style width="300px" height="200px">
+               <p>7 to 10 Weeks Course Duration</p>
+               <p>Course Duration for Peak Season between 3 - 5 months. No waiting list for final Practical JPJ Test. 
+                   Limited number of students to ensure the whole process runs smoothly.</p>
+              </div>
+       
+              <div class="box">
+                  <img src="/static/pg32.webp"style width="300px" height="200px">
+                  <p>Learn in Our Award Winning Facilities</p>
+               <p>5 Star Rated Driving Academy / Award Winner for Best Driving Academy & Accredited Training Center</p>
+              </div>
+       
+              <div class="box">
+                  <img src="/static/pg34.webp"style width="300px" height="200px">
+                  <p>22 - 26 Hours Driving Program  </p>
+               <p>1 to 1 Teaching Method by Experienced Coaches </p>
+              </div>
+       
+              <div class="box">
+                  <img src="/static/pg35.webp"style width="300px" height="200px">
+                  <p>Car for Practical Training & Test - Proton IRIZ</p>
+                  <p>Proton Iriz Automatic OR Manual. 5 Star Asean NCAP Safety Rated Cars for The Best Safety & Comfort </p>
+              </article>
+        </section>
 
-    <nav>
-        <ul class="topnav">
-            <li><a href="/products">Shop Now</a></li>
-            <li><a href="/purchaseditems">Purchase History</a></li>
-            <li><a href="/viewdelivery">Track Delivery</a></li>
-            <li><a href="/noticus">Notification</a></li>
-            <li><a href="/feedback">Feedback</a></li>
-            <li><a href="/aboutus">About Us</a></li>
-            <li><a href="/logout">Log Out</a></li>
-        </ul>
-    </nav>
-
-    <section class="main">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="/static/product1.jpg" alt="Product 1">
-                <h3>Chair</h3>
-                <p>RM30.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/static/product2.jpg" alt="Product 2">
-                <h3>Dining Table</h3>
-                <p>RM100.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/static/product3.jpg" alt="Product 3">
-                <h3>Handbag</h3>
-                <p>RM15.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product-card">
-                <img src="/static/product4.jpg" alt="Product 4">
-                <h3>Sports Shoes</h3>
-                <p>RM25.00</p>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-    </section>
 
     <footer>
-        <p>Contact us: <a href="mailto:support@onlineshop.com">support@onlineshop.com</a></p>
-        <p>Tel: 03 - 1234 5678</p>
-        <p>Monday - Sunday: 9:00 AM - 6:00 PM</p>
-    </footer>
+        <figure class="logo">
+            <img src="/static/1.jpg" style width="100px" height="100px">
+         </figure>
+       <br> Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
+       <br> 40150 Shah Alam, Selangor<br>
+       <br> Tel : 03 - 7845 9898<br>
+       <br>Monday - Sunday<br>
+       <br> 8:00 am - 4:30 pm<br>
+       <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
+      </footer>
+
 </body>
 </html>
