@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Body Styling */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Logo Section */
+.logo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    
+}
+
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+/* Navbar Styling */
+nav {
+    background-color: #f4f4f4;
+    padding: 15px;
+    text-align: center;
+}
+
+.topnav {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.topnav li {
+    position: relative;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: #333;
+    padding: 15px 20px;
+}
+
+.topnav li:hover a {
+    background-color: #ddd;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    display: block;
+}
+
+/* Main Section */
+.main {
+    text-align: center;
+    background: url('/static/bg1.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px 20px;
+}
+
+.admintop {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    color: white;
+}
+
+/* .overlay h1 {
+    font-size: 3rem;
+    font-family: ITC Cheltenham, serif;
+} */
+
+.overlay p {
+    font-size: 1.5rem;
+}
+
+.description {
+    font-size: 1rem;
+    color: white;
+    margin-top: 20px;
+}
+
+/* Footer Section */
+footer {
+    text-align: center;
+    background-color: #f1f1f1;
+    padding: 20px;
+    color: #555;
+    font-size: 12px;
+
+}
