@@ -87,6 +87,20 @@ nav {
   padding: 40px 20px;
 }
 
+.maincourier {
+    text-align: center;
+    background: url('/static/bgco3.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 40px 20px;
+  }
+
+.mainsponsor {
+text-align: center;
+background: url('/static/bgsp.jpg') no-repeat center center;
+background-size: cover;
+padding: 40px 20px;
+}
+
 .admintop {
   padding: 40px;
   font-weight: bold;  /* Makes the text bold */
