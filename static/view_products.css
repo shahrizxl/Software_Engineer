@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Page Title */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 75%;
+    /* text-align: left; */
+}
+
+h1::before {
+    content: "👁"; 
+    font-size: 24px;
+}
+
+/* Table Container */
+.table-container {
+    background-color: #d3d3d3;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.search-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+    margin-right: 10px;
+}
+
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #9a9a9a;
+    color: black;
+    font-weight: bold;
+}
+
+td {
+    background-color: #e0e0e0;
+}
+
+/* Image Styling */
+td img {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+    /* display: block; */
+    padding: 10px;
+    background-color: white;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 1px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+
+/* Container for buttons */
+.buttons-container {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: flex-end; /* Pushes them to the right */
+    gap: 5px; /* Space between buttons */
+    width: 75%; /* position */
+    margin-top: 20px;
+}
+
