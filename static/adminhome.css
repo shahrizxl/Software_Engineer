@@ -1,116 +1,168 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-
 /* General Reset */
 body, html {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Body Styling */
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 /* Logo Section */
 .logo img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
 .logo img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* Navbar Styling */
 nav {
-    background-color: #f4f4f4;
-    padding: 15px;
-    text-align: center;
+  background-color: #f4f4f4;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .topnav {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .topnav li {
-    position: relative;
+  position: relative;
 }
 
 .topnav a {
-    text-decoration: none;
-    color: #333;
-    padding: 15px 20px;
+  text-decoration: none;
+  color: #333;
+  padding: 15px 20px;
 }
 
 .topnav li:hover a {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #ddd;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
+  color: #801616;
 }
 
 .dropdown-content a {
-    padding: 12px 16px;
-    display: block;
+  padding: 12px 16px;
+  display: block;
 }
 
+.dropdown-content a:hover {
+    background-color: #eaeaea; /* Change background on hover */
+    color: #b68282; /* change the text color */
+  }
 /* Main Section */
 .main {
-    text-align: center;
-    background: url('/static/bg1.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 40px 20px;
+  text-align: center;
+  background: url('/static/bg11.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 40px 20px;
 }
 
 .admintop {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 40px;
-    color: white;
+  padding: 40px;
+  font-weight: bold;  /* Makes the text bold */
+  font-size: 40px;     /* Adjusts the size of the text */
+  color: rgba(255,255,255,0.8);        /* Text color */
+  font-family: "Georgia";
 }
 
-/* .overlay h1 {
-    font-size: 3rem;
-    font-family: ITC Cheltenham, serif;
-} */
-
-.overlay p {
-    font-size: 1.5rem;
+/* Content Below Image */
+.content {
+  margin-top: 50px;
+  text-align: center;
 }
 
-.description {
-    font-size: 1rem;
-    color: white;
-    margin-top: 20px;
+/*  Box Styling */
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 40px;
+  margin:60px;
+}
+
+.box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 45%;
+}
+
+.box h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.box p {
+  font-size: 1rem;
+  color: #555;
 }
 
 /* Footer Section */
 footer {
-    text-align: center;
-    background-color: #f1f1f1;
-    padding: 20px;
-    color: #555;
-    font-size: 12px;
-
+  text-align: center;
+  background-color: #ffffff;
+  padding: 20px;
+  color: #555;
+  font-size: 12px;
+  margin-top: 40px;
 }
+
+footer p a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+footer p a:hover {
+  text-decoration: underline;
+}
+
+h3 {
+    font-size: 50px;
+}
+
+.description p {
+    font-size: 18px;
+}
+
+/* Logo Section */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+
+  
