@@ -4,30 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/viewnoti.css">
+    
 </head>
 <body>
-    <h1>Sponsor Notification</h1>
+    <h1>Notification Message from Sponsor</h1>
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>No.</th>
                 <th>Content</th>
                 
             </tr>
@@ -35,7 +20,7 @@
 
         <tbody>
             {% for notification in noti_list %}
-                <tr>
+                <tr class="notification-row">
                     <td>{{ notification.id }}</td>
                     <td>{{ notification.content }}</td>
                 </tr>

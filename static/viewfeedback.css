@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Page Title */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 92%;
+}
+
+h1::before {
+    content: "🗣️"; 
+    font-size: 24px;
+}
+
+/* Table Container */
+.table-container {
+    background-color: #d3d3d3;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 1500px;
+    text-align: center;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #9a9a9a;
+    color: black;
+    font-weight: bold;
+}
+
+td {
+    background-color: #e0e0e0;
+    font-size: 15px;
+}
+
+/* Line Separator for Each Row */
+.notification-row {
+    border-bottom: 2px solid #ccc;
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    min-width: 120px;
+    height: 45px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Container for buttons */
+.buttons-container {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: flex-end; /* Center the buttons */
+    gap: 10px; /* Space between buttons */
+    width: 93%;
+    margin-top: 20px;
+}
+
+/* Line Separator for Each Row */
+.each-row {
+    border-bottom: 2px solid #ccc;
+}
