@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
@@ -11,7 +11,7 @@
         <figure class="logo">
             <a href="/"> <img src="/static/logo.png" width="100px" height="100px"></a>
         </figure>
-
+    </header>
         <nav>
             <ul class="topnav">
                 <li class="dropdown">
@@ -24,7 +24,7 @@
                 <li class="dropdown">
                     <a href="#memo">Notification</a>
                     <ul class="dropdown-content">
-                        <li><a href="/viewnotiadmin">View notification</a></li>
+                        <li><a href="/viewnotiadmin">View Notification</a></li>
                         <li><a href="/sncus">Notification to customer</a></li>
                         <li><a href="/sncou">Notification to courier</a></li>
                         <li><a href="/snspo">Notification to sponsor</a></li>
@@ -36,28 +36,37 @@
                 <li><a href="/">Log Out</a></li>
             </ul>
         </nav>
-    </header>
     
-    <section class="main" id="history"> 
-        <article>
-            <header class="admintop">
-                <div class="overlay">
-                    <h1>Welcome Back, Admin!</h1>
-                    <p>Your Marketplace for Second Chances.</p>
-                </div>
-            </header>
-
-            <section class="picture">
-                <h3 class="header">Trash and Treasure</h3>
-                  <p class="description">
-                      Welcome to the admin dashboard of Trash and Treasure! 
-                      Manage and monitor customer feedback, inventory, and more.
-                  </p>
-                <h3>Our Mission</h3>
-                  <p>To reduce waste and promote sustainability through second-hand shopping.</p>
+    <section class="main">
+       
+        <!-- Content Below Image -->
+        <section class="content">
+            <section class="admintop">
+                <h3 class="header">Welcome to the Admin Dashboard<br> of Trash and Treasure!</h3>
             </section>
+   
+            <!-- Vision and Mission Boxes -->
+            <section class="container">
+                <div class="box">
+                  <h3>About Us</h3>
+                  <p>At Trash and Treasure, we believe in sustainability and second chances. 
+                    Use this dashboard to manage our catalog of renewed and preloved items, update pricing and promotions, and monitor customer feedback. 
+                    Together, let’s create a greener future by reducing waste and promoting reuse.</p>
+                </div>
 
-        </article>
+                <div class="box">
+                    <h3>Our Vision</h3>
+                    <p>To be the leading platform for sustainable shopping, promoting reuse and renewal as a lifestyle choice.</p>
+                </div>
+                <div class="box">
+                    <h3>Our Mission</h3>
+                    <p>• Sustainability: Reduce landfill waste by extending the life cycle of everyday items.</p>
+                    <p>• Affordability: Provide quality, affordable products to our customers.</p>
+                    <p>• Community: Build a marketplace that connects buyers and sellers who value sustainability.</p>
+                </div>
+            </section>
+        </section>
+        
     </section>
 
     <footer>
@@ -71,6 +80,5 @@
         <br> 8:00 am - 4:30 pm<br>
         <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
     </footer>
-
 </body>
 </html>
