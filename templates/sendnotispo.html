@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Notification</title>
-    <link rel="stylesheet" href="/static/feedback.css">
+    <link rel="stylesheet" href="/static/noti.css">
 </head>
 <body>
-    <h1>Sponsor Notification</h1>
-    <form action="/snspo" method="post">
-       
-        <label for="content">Notification:</label><br>
-        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+    <div class="form-container">
+        
+        <form action="/snspo" method="post">
 
+            <div class="form-row">
+                <!-- Left Side - Title -->
+                <div class="form-title">Send Message <br>to Sponsor</div>
+            
+                <!-- Right Side - Text Area -->
+                <div class="message-box">
+                    <label for="content"></label>
+                    <textarea name="content" id="content" rows="6" required placeholder="Message"></textarea>
+                </div>
+            </div>
 
-        <button type="submit">Submit Notification</button>
-        <button type="button" onclick="window.location.href='/adminhome'">Back</button>
-    </form>
+             <!-- Buttons Below -->
+            <div class="buttons-container">
+                <button type="submit">Submit Notification</button>
+                <button type="button" onclick="window.location.href='/adminhome'">Back</button>
+            </div>
+
+        </form>
+
+    </div>
 </body>
 </html>

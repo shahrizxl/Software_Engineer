@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #d3d3d3; /* Gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Form Container */
+.form-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 550px; /* Width of the form */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+}
+
+/* Title Styling */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Form Layout */
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+/* Row Container - Title & Message Box */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Left Side - Title */
+.form-title {
+    flex: 1;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Right Side - Text Area */
+textarea {
+    flex: 1;
+    width: 260px;
+    height: 160px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    font-size: 16px;
+    resize: none;
+}
+
+/* Buttons Container */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    min-width: 100px; /* Control button width */
+    height: 45px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+input {
+    flex: 1;
+    width: 260px;
+    height: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    font-size: 14px;
+    resize: none;
+    
+}
+
+.form-containercust {
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 550px; /* Width of the form */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50%;
+}

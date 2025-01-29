@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Notification</title>
-    <link rel="stylesheet" href="/static/feedback.css">
+    <link rel="stylesheet" href="/static/noti.css">
 </head>
 <body>
-    <h1>Customer Notification</h1>
-    <form action="/sncus" method="post">
+    <div class="form-containercust">
+        <form action="/sncus" method="post">
 
-        <label>Customer ID:</label>
-        <input name="customer_id", id="customer_id" required><br><br>
-       
+            <div class="form-row">
 
-        <label for="content">Notification:</label><br>
-        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+                <!-- Left Side - Title -->
+                <div class="form-title">Send Message <br>to Customer</div>
+                
+                <div class="form">
+                    <div class="message-box">
+                        <label name="customer_id"></label>
+                        <input name="customer_id", id="customer_id" required placeholder="Customer ID"><br><br>
+                    </div>
 
-
-        <button type="submit">Submit Notification</button>
-        <button type="button" onclick="window.location.href='/adminhome'">Back</button>
-    </form>
+                    <!-- Right Side - Text Area -->
+                    <div class="message-box">
+                        <label for="content"></label>
+                        <textarea name="content" id="content" rows="6" required placeholder="Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- Buttons Below -->
+            <div class="buttons-container">
+                <button type="submit">Submit Notification</button>
+                <button type="button" onclick="window.location.href='/adminhome'">Back</button>
+            </div>
+        </form>
 </body>
 </html>
