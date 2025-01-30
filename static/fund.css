@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    padding-top: 20px;
+}
+
+h2{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    width: 55%;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Main container for aligning left and right sections */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px; /* Space between the containers and table */
+}
+
+/* Left container for the Update Fund form */
+.left-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: bold;
+    background-color: #e0e0e0;
+    padding: 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 95%;
+}
+
+/* Right container for the Total Balance */
+.right-container {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e0e0e0;
+    padding: 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 95%;
+}
+
+/* For Better Aligning of the Total Balance */
+.right-container h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* Aligning Labels and Inputs Horizontally */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 30%;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select {
+    width: 60%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Styling for Input Fields and Select Box */
+input, select, button {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.buttons-container {
+    display: flex;              /*  flexbox for horizontal layout */
+    gap: 20px;                  /* Space between buttons */
+    justify-content: center;    /* centers buttons */
+    width: 100%;
+    margin-top: 10px;           /* margin between form and buttons */
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 35%;
+    height: fit-content;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button[type="submit"]:hover {
+    background-color: #4CAF50;  
+    transition: background-color 0.3s ease;  
+}
+
+
+/* Transaction Log Table Styling */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #e9e9e9;
+}
+
+th {
+    background-color: #9a9a9a;
+    font-weight: bold;
+}
+
+td {
+    background-color: #e0e0e0;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+
