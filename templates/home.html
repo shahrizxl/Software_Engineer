@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <title>Introduction</title>
     <link rel="stylesheet" href="/static/home.css">
 </head>
-<body class=homebody>
+<body class="homebody">
 
-    <figure class="logo">
-        <a href="/"> <img src="/static/logo.png" style width="100px" height="100px"></a>
-    </figure>
+    <header class="logo-header">
+        <figure class="logo">
+            <a href="/"> <img src="/static/logo.png" style="width: 100px; height: 100px;"></a>
+        </figure>
+    </header>
 
     <div class="homebutton">
-    <button type="button" onclick="window.location.href='/customer'">Customer</button>
-    <button type="button" onclick="window.location.href='/courier'">Courier</button>
-    <button type="button" onclick="window.location.href='/sponsor'">Sponsor</button>
-    <button type="button" onclick="window.location.href='/admin'">Admin</button>
+        <div class="button-container">
+            <img src="/static/icon1.png" alt="Customer">
+            <button type="button" onclick="window.location.href='/customer'">Customer</button>
+        </div>
+        <div class="button-container">
+            <img src="/static/icon1.png" alt="Courier">
+            <button type="button" onclick="window.location.href='/courier'">Courier</button>
+        </div>
+        <div class="button-container">
+            <img src="/static/icon1.png" alt="Sponsor">
+            <button type="button" onclick="window.location.href='/sponsor'">Sponsor</button>
+        </div>
+        <div class="button-container">
+            <img src="/static/icon1.png" alt="Admin">
+            <button type="button" onclick="window.location.href='/admin'">Admin</button>
+        </div>
     </div>
       
 </body>
-
-
 </html>
