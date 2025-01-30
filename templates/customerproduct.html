@@ -22,7 +22,7 @@
             <div class="product-card">
                 <img src="data:{{ product.picture_mimetype }};base64,{{ product.productpicture | b64encode }}" alt="{{ product.productname }}">
                 <div class="product-info">
-                    <p>ID: {{ product.id }}</p>
+                    <!-- <p>ID: {{ product.id }}</p> -->
                     <p>{{ product.productname }}</p>
                     <p>Price: RM {{ product.productprice }}</p>
                     <p>Stock: {{ product.productstock }}</p>
