@@ -7,34 +7,46 @@
 <body>
     <figure class="logo">
         <a href="/"> <img src="/static/logo.png" style width="100px" height="100px"></a>
-     </figure>
-     
-    <section class=color>
-    <h1>Admin Login</h1>
-    <p class=faillogin>Login failed! Invalid username or password!</p> <br>
-    <form action="/admin" method="post">
-        <label>Username:</label>
-        <input name="username" required>
+    </figure>
+    <section class="main-container">
+        <div class="login-header">
+          <h1>Log In</h1>
+          <p class="word">Admin</p>
+          <p class=faillogin>Login failed! Invalid username or password!</p> <br>
+        </div>
 
-        <label>Password:</label>
-        <input type=password name="password" required><br><br>
+        <section class="login-container">
+          <form action="/admin" method="post">
+              <label>Username</label>
+              <input name="username" placeholder="Username" required><br>
 
-        <button type="submit">Log in</button>
-        <button type="button" onclick="window.location.href='/'">Back</button>
-        
-    </form>
+              <label>Password</label>
+              <input type=password name="password" placeholder="*****" required><br><br>
 
+              <button type="submit">Log in</button>
+              <button type="button" onclick="window.location.href='/'">Back to Home Page</button>    
+          </form>
+        </section>
     </section>
-<footer>
-    <figure class="logo">
-        <img src="/static/logo.png" style width="100px" height="100px">
-     </figure>
-   <br> Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
-   <br> 40150 Shah Alam, Selangor<br>
-   <br> Tel : 03 - 7845 9898<br>
-   <br>Monday - Sunday<br>
-   <br> 8:00 am - 4:30 pm<br>
-   <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
-  </footer>
+
+
+    <footer>
+        <div class="contact-info">
+            <!-- Image on the left -->
+            <img src="/static/socmed.png" alt="Image" class="footer-image">
+            
+            <!-- Contact Details on the right -->
+            <div class="contact-details">
+                <p class="bold">Contact Us</p>
+                <p><a href="mailto:trashntreasure24@gmail.com">TrashAndTreasure@gmail.com</a></p>
+                03-214 2592<br>
+                <br>Office :
+                <br>UP2-01, Centre Management Office, Melawati Mall, 355,
+                <br>Jalan Bandar Melawati, Pusat Bandar Melawati, 53100, Kuala Lumpur.<br>
+            </div>
+        </div>
+    </footer>
+    
 </body>
 </html>
+

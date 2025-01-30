@@ -3,59 +3,65 @@
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" href="/static/signup.css">
-    
 </head>
 <body>
     <figure class="logo">
-        <a href="/"> <img src="/static/logo.png" style width="100px" height="100px"></a>
-     </figure>
-    <h1>Sign Up</h1>
-    <form action="/customersignup" method="post">
-        <label for="id">ID :</label>
-        <input name="id"   required><br>
-        <br>
+        <a href="/"> <img src="/static/logo.png" style="width: 100px; height: 100px"></a>
+    </figure>
+    <section class="main-container">
+        <div class="login-header">
+            <h1>Sign Up</h1>
+            <p class="word">Customer</p>
+        </div>
 
-        
-        <label for="name">Name :</label>
-        <input name="name" title="Enter your name" required><br>
-        <br>
-        
-        <label>Password:</label>
-        <input type="password" name="password" required>
-        <br><br>
-        
-        <label>Email:</label>
-        <input type="email" name="email" required><br>
-        <br>
+        <section class="login-container">
+            <form action="/customersignup" method="post">
+                <label for="id">ID</label>
+                <input name="id" required>
 
-        <label>Phone Number:</label>
-        <input name="ph" required><br>
-        <br>
-    
-        <label>Gender:</label>
-        <select name="gender">
-            <option>Male</option>
-            <option>Female</option>
-        </select><br><br>
-        
-        <label>Date of Birth:</label>
-        <input type="date" name="dob" required><br><br>
+                <label for="name">Name</label>
+                <input name="name" title="Enter your name" required>
 
-        <p><a href="/customer">Got account? Log in right now</a></p>
-        
-        <button>Sign Up</button>
-        <button onclick="document.location='/'" >Back</button>
-    </form>
+                <label>Password</label>
+                <input type="password" name="password" required>
+
+                <label>Email</label>
+                <input type="email" name="email" required>
+
+                <label>Phone Number</label>
+                <input name="ph" required>
+
+                <label>Gender</label>
+                <select name="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+
+                <label>Date of Birth</label>
+                <input type="date" name="dob" required><br><br>
+
+                <button>Sign Up</button>
+                
+                <p class="link"><a href="/customer">Got an account? Log in now</a></p>
+            </form>
+        </section>
+    </section>
+
     <footer>
-        <figure class="logo">
-            <img src="/static/logo.png" style width="100px" height="100px">
-         </figure>
-       <br> Lot 3509, Seksyen U6, Kampung Melayu Subang,<br>
-       <br> 40150 Shah Alam, Selangor<br>
-       <br> Tel : 03 - 7845 9898<br>
-       <br>Monday - Sunday<br>
-       <br> 8:00 am - 4:30 pm<br>
-       <p><a href="mailto:drivingacademy@gmail.com">drivingacademy@gmail.com</a></p>
-      </footer>
+        <div class="contact-info">
+            <!-- Image on the left -->
+            <img src="/static/socmed.png" alt="Image" class="footer-image">
+            
+            <!-- Contact Details on the right -->
+            <div class="contact-details">
+                <p class="bold">Contact Us</p>
+                <p><a href="mailto:trashntreasure24@gmail.com">TrashAndTreasure@gmail.com</a></p>
+                03-214 2592<br>
+                <br>Office :
+                <br>UP2-01, Centre Management Office, Melawati Mall, 355,
+                <br>Jalan Bandar Melawati, Pusat Bandar Melawati, 53100, Kuala Lumpur.<br>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

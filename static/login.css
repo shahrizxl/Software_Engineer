@@ -1,19 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 /* General Reset */
 body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white; /*f9f9f9f Main background */
   color: #333;
+  height: 100%;
 }
 
-/* Body Styling */
-body {
+/* Main Container (Grey Background) */
+.main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* Take up the full height of the viewport */
+  background-color: #d4d4d4;  /* Grey background */
+  width: 100%;  /* Ensures the container takes up full width */
+  max-width: 900px;  /* Limits the container to a maximum width of 600px */
+  margin: 0 auto;  /* Centers the container horizontally */
+  padding-bottom: 10px;
   min-height: 100vh;
+  height: auto;
+}
+
+/* Login Header (Titles) */
+.login-header {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+/* Login Container (White Background) */
+.login-container {
+  background-color: white; /* White background for the form container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 25px;
+  width: 230px;
+  max-width: 100%;
+  text-align: center;
 }
 
 /* Logo Section */
@@ -34,23 +61,14 @@ body {
   transform: scale(1.1);
 }
 
-/* Login Section */
-section.color {
-  background-color: #ece6dd;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  max-width: 400px;
-  max-height: 350px;
-  margin: 0 auto;
-  padding: 150px;
-  text-align: center;
+h1 {
+  font-size: 50px;
+  margin-bottom: -15px;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 50px;
-  margin-top: -60px; 
+.word {
+  font-size: 25px;
+  color: #555;
 }
 
 form {
@@ -62,62 +80,117 @@ form {
 label {
   font-weight: bold;
   text-align: left;
-  display: inline-block;
-  margin-bottom: 5px;
+  /* display: inline-block; */
+  margin-bottom: 3px;
   color: #525050;
 }
 
 input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
-input:focus {
-  border-color: #007BFF;
-}
-
 button {
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 12px;
+  font-size: 14px;
   color: #fff;
-  background-color: #21AD8A;
+  background-color: #333;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background-color: #4b4d4e;
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  background-color: #0056b3;  /* Darker green on hover */
+}
+button[type="button"]:hover {
+  background-color: #87837d;  
   transform: translateY(-2px);
 }
 
-button[type="button"] {
-  background-color: #b7b2aa;
+p.faillogin {
+  color: red;
 }
 
-button[type="button"]:hover {
-  background-color: #676158;
+/* sign up link */
+.link a {
+  color: #007BFF;  
+  font-size: 14px;  
+  text-decoration: none;  /* Remove underline */
+  transition: color 0.3s ease, text-decoration 0.3s ease;  
 }
+
+/* Hover Effect */
+.link a:hover {
+  color: #0056b3;  /* Darker blue color for the hover effect */
+  text-decoration: underline;  /* Underline the text on hover */
+}
+
+/* sign up link */
+.link a {
+  color: #007BFF;  
+  font-size: 14px;  
+  text-decoration: none;  /* Remove underline */
+  transition: color 0.3s ease, text-decoration 0.3s ease;  
+}
+
+/* Hover Effect */
+.link a:hover {
+  color: #0056b3;  /* Darker blue color for the hover effect */
+  text-decoration: underline;  /* Underline the text on hover */
+}
+
 
 /* Footer Section */
 footer {
-  text-align: center;
-  background-color: #f1f1f1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
   padding: 20px;
   color: #555;
   font-size: 14px;
   margin-top: 40px;
+  border-top: 1px solid #d4d4d4;
 }
 
+/* Footer contact-info container */
+.contact-info {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the image in the footer */
+.footer-image {
+  width: 150px;  /* Adjust width as needed */
+  height: 30px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure the image covers the space properly */
+  margin-top: -120px;
+}
+
+/* Contact details section */
+.contact-details {
+  text-align: left;
+  margin-left: 230px;
+
+}
+p.bold{
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+
 footer p a {
-  color: #007BFF;
+  color: #555;
   text-decoration: none;
 }
 
@@ -125,6 +198,4 @@ footer p a:hover {
   text-decoration: underline;
 }
 
-p.faillogin {
-  color: red;
-}
+

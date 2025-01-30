@@ -6,7 +6,7 @@ body, html {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  background-color: #e2e2e2;
+  background-color: hsl(0, 0%, 89%);
   color: #333;
 }
 
@@ -22,7 +22,7 @@ body {
 /* Logo Header Section */
 .logo-header {
   position: relative;  
-  top: -120px;  
+  top: -100px;  
   text-align: center;
 }
 
@@ -33,8 +33,8 @@ body {
 }
 
 .logo img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
@@ -67,7 +67,7 @@ body {
 .homebutton button {
   padding: 20px;
   font-size: 18px;
-  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
   margin: 20px;
   color: #fff;
   background: linear-gradient(135deg,#404040, #333);

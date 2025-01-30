@@ -1,20 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 /* General Reset */
 body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white; /* Main background */
   color: #333;
+  height: 100%;
 }
 
-/* Body Styling */
-body {
+/* Main Container (Grey Background) */
+.main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  padding: 0 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;  /* Take up the full height of the viewport */
+  background-color: #d4d4d4;  /* Grey background */
+  width: 100%;  /* Ensures the container takes up full width */
+  max-width: 900px;  /* Limits the container to a maximum width */
+  margin: 0 auto;  /* Centers the container horizontally */
+  padding-bottom: 10px;
+  height: auto; /* Let the height be flexible */
+  min-height: 100vh; /* Ensure it still takes full height */
+}
+
+/* Login Header (Titles) */
+.login-header {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Login Container (White Background) */
+.login-container {
+  background-color: white; /* White background for the form container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 230px;
+  max-width: 100%;
+  text-align: center;
+  height: auto;
 }
 
 /* Logo Section */
@@ -35,61 +62,58 @@ body {
   transform: scale(1.1);
 }
 
-/* Sign-Up Form Section */
 h1 {
-  text-align: center;
-  font-size: 28px;
-  color: #352a21;
-  margin-bottom: 20px;
+  font-size: 50px;
+  margin-bottom: -15px;
 }
 
+.word {
+  font-size: 25px;
+  color: #555;
+}
+
+/* Form Styling */
 form {
-  background-color: #ece6dd;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 70px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 15px;
+
 }
 
 label {
   font-weight: bold;
-  margin-bottom: 5px;
+  text-align: left;
+  font-size: 14px;
   color: #525050;
 }
 
-input, select {
-  width: 100%;
+input {
+  width: 90%;
   padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  font-size: 13px;
+  border: 1.5px solid #1e1e1e;
+  outline: none;
+  transition: border-color 0.3s ease;
+  height: 14px;
+}
+
+/* Gender Select Box */
+select {
+  width: 100%;  /* Ensures the select box takes up full width */
+  padding: 10px; /* Increased padding for bigger select box */
+  font-size: 13px; /* Adjust font size to be larger */
+  border: 1.5px solid #1e1e1e;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
-input:focus, select:focus {
-  border-color: #007BFF;
-}
 
-p a {
-  color: #007BFF;
-  text-decoration: none;
-}
-
-p a:hover {
-  text-decoration: underline;
-}
-
+/* Button Styling */
 button {
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 12px;
+  font-size: 14px;
   color: #fff;
-  background-color: #21AD8A;
+  background-color: #333;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -97,33 +121,73 @@ button {
 }
 
 button:hover {
-  background-color: #4b4d4e;
+  background-color: #0056b3;
   transform: translateY(-2px);
 }
 
-button:last-of-type {
-  background-color: #b7b2aa;
+/*  link */
+.link a {
+  color: #007BFF;  
+  font-size: 14px;  
+  text-decoration: none;  /* Remove underline */
+  transition: color 0.3s ease, text-decoration 0.3s ease;  
 }
 
-button:last-of-type:hover {
-  background-color: #676158;
+/* Hover Effect */
+.link a:hover {
+  color: #0056b3;  /* Darker blue color for the hover effect */
+  text-decoration: underline;  /* Underline the text on hover */
 }
 
 /* Footer Section */
 footer {
-  text-align: center;
-  background-color: #f1f1f1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
   padding: 20px;
   color: #555;
   font-size: 14px;
   margin-top: 40px;
+  border-top: 1px solid #d4d4d4;
+}
+
+/* Footer contact-info container */
+.contact-info {
+  display: flex;
+  align-items: center;
+  width: 100%;  /* Ensure the contact section uses the full width */
+}
+
+/* Style for the image in the footer */
+.footer-image {
+  width: 150px;  /* Adjust width as needed */
+  height: 30px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure the image covers the space properly */
+  margin-top: -120px;  /* Adjust to align with text properly */
+}
+
+/* Contact details section */
+.contact-details {
+  text-align: left;
+  margin-left: 230px; /* Adjust the spacing as per your layout needs */
+}
+
+p.bold {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
 footer p a {
-  color: #007BFF;
+  color: #555;
   text-decoration: none;
 }
 
 footer p a:hover {
   text-decoration: underline;
+}
+
+p.faillogin {
+  color: red;
 }
