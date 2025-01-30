@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Fund</title>
+    <link rel="stylesheet" href="/static/viewtable.css">
 </head>
 <body>
-
-
-
-    <h3>Transaction Log</h3>
-    {% if transactions %}
-    <table border="1">
+     <h1 class="fundsale">☲ Transaction Log</h1> <!--📃 -->
+    <table class="fundsale">
         <thead>
             <tr>
                 <th>Type</th>
@@ -21,19 +18,22 @@
             </tr>
         </thead>
         <tbody>
-            {% for transaction in transactions %}
-            <tr>
-                <td>{{ transaction.type }}</td>
-                <td>RM {{ "{:,.2f}".format(transaction.amount) }}</td>
-                <td>{{ transaction.purpose }}</td>
-                <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-            </tr>
-            {% endfor %}
+            {% if transactions %}
+                {% for transaction in transactions %}
+                    <tr class="notification-row">
+                        <td>{{ transaction.type }}</td>
+                        <td>RM {{ "{:,.2f}".format(transaction.amount) }}</td>
+                        <td>{{ transaction.purpose }}</td>
+                        <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr class="notification-row">
+                    <td colspan="4">No transactions to display.</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
-    {% else %}
-    <p>No transactions to display.</p>
-    {% endif %}
-
+    <button type="button" onclick="window.location.href='/sponsorhome'">Back</button>
 </body>
 </html>

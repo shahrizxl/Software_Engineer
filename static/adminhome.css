@@ -63,6 +63,7 @@ nav {
   min-width: 160px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  text-align: left;
 }
 
 .dropdown:hover .dropdown-content {
@@ -82,21 +83,21 @@ nav {
 /* Main Section */
 .main {
   text-align: center;
-  background: url('/static/bg11.jpg') no-repeat center center;
+  background: url('/static/image/bg11.jpg') no-repeat center center;
   background-size: cover;
   padding: 40px 20px;
 }
 
 .maincourier {
     text-align: center;
-    background: url('/static/bgco3.jpg') no-repeat center center;
+    background: url('/static/image/bgco3.jpg') no-repeat center center;
     background-size: cover;
     padding: 40px 20px;
   }
 
 .mainsponsor {
 text-align: center;
-background: url('/static/bgsp.jpg') no-repeat center center;
+background: url('/static/image/bgsp.jpg') no-repeat center center;
 background-size: cover;
 padding: 40px 20px;
 }

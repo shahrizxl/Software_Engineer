@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff; /* Gray background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Page Title */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+h1.viewcus{
+    width: 64%;
+}
+
+h1.viewfeedback{
+    width: 71%;
+}
+h1.fundsale{
+    width: 57%;
+}
+
+/* Table Container */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table.viewfeedback {
+    max-width: 1000px;
+}
+table.viewcus {
+    max-width: 900px;   
+}
+table.fundsale {
+    max-width: 800px;   
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #9a9a9a;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+td {
+    background-color: #e0e0e0;
+    padding: 15px;
+    font-size: 14px;
+}
+
+/* Column Styling */
+
+.notification-id, .notification-content {
+    text-align: left;
+    font-size: 14px;
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    min-width: 120px;
+    height: 45px;
+}
+
+button:hover {
+    background-color: #555;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Information</title>
+    <link rel="stylesheet" href="/static/viewtable.css">
+</head>
+<body>
+    <h1 class="viewcus">👤Admin Information</h1>
+    <table class="viewcus">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Phone Num</th>
+                <th>Gender</th>
+                <th>DOB</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for admin in admin_list %}
+                <tr class="notification-row">
+                    <td>{{ admin.id }}</td>
+                    <td>{{ admin.name }}</td>
+                    <td>{{ admin.password }}</td>
+                    <td>{{ admin.email }}</td>
+                    <td>{{ admin.ph }}</td>
+                    <td>{{ admin.gender }}</td>
+                    <td>{{ admin.dob }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" onclick="window.location.href='/sponsorhome'">Back</button>
+</body>
+</html>

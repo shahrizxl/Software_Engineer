@@ -81,7 +81,7 @@ body {
 
 button:hover {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, #7a7070, #7c7474);
+  background: linear-gradient(135deg, #9b2d2d, #862121);  /* Medium dark red gradient */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 

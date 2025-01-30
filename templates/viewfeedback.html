@@ -4,39 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Feedback</title>
-    <link rel="stylesheet" href="/static/viewfeedback.css">
+    <link rel="stylesheet" href="/static/viewtable.css">
     
 </head>
 <body>
-    <h1>All Feedback</h1>
+    <h1 class="viewfeedback">★ All Feedback</h1>
+    <table class="viewfeedback">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Content</th>
+                <th>Date</th>
+            </tr>
+        </thead>
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Content</th>
-                    <th>Date</th>
+        <tbody>
+            {% for feedback in feedback_list %}
+                <tr class="each-row">
+                    <td>{{ feedback.id }}</td>
+                    <td>{{ feedback.name }}</td>
+                    <td>{{ feedback.email }}</td>
+                    <td>{{ feedback.ph }}</td>
+                    <td>{{ feedback.content }}</td>
+                    <td>{{ feedback.date }}</td>
                 </tr>
-            </thead>
-
-            <tbody>
-                {% for feedback in feedback_list %}
-                    <tr class="each-row">
-                        <td>{{ feedback.id }}</td>
-                        <td>{{ feedback.name }}</td>
-                        <td>{{ feedback.email }}</td>
-                        <td>{{ feedback.ph }}</td>
-                        <td>{{ feedback.content }}</td>
-                        <td>{{ feedback.date }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
+    
 
     <div class="buttons-container">
     <button type="button" onclick="window.location.href='/adminhome'">Back</button>
