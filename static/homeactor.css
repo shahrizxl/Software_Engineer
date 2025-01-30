@@ -102,6 +102,13 @@ background-size: cover;
 padding: 40px 20px;
 }
 
+.maincust {
+  text-align: center;
+  background: url('/static/image/bgcust.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 40px 20px;
+  }
+
 .admintop {
   padding: 40px;
   font-weight: bold;  /* Makes the text bold */

@@ -4,70 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Products</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        img {
-            max-width: 100px;
-            height: auto;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/customerproduct.css">
 </head>
 <body>
-    <h1>All Products</h1>
 
-    <form method="POST" action="/products">
+    <h1>Our Products</h1>
+
+    <!-- Search Form -->
+    <form method="POST" action="/products" class="search-form">
         <input type="text" name="search_term" placeholder="Search products..." value="{{ search_term or '' }}">
         <button type="submit">Search</button>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Image</th>
-                <th>Action</th>
-            </tr>
-        </thead>
+    <!-- Products Grid -->
+    <div class="products-container">
+        {% for product in products %}
+            <div class="product-card">
+                <img src="data:{{ product.picture_mimetype }};base64,{{ product.productpicture | b64encode }}" alt="{{ product.productname }}">
+                <div class="product-info">
+                    <p>ID: {{ product.id }}</p>
+                    <p>{{ product.productname }}</p>
+                    <p>Price: RM {{ product.productprice }}</p>
+                    <p>Stock: {{ product.productstock }}</p>
+                </div>
+                <form method="POST" action="/add_to_cart/{{ product.id }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.productstock }}" required>
+                    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
 
-        <tbody>
-            {% for product in products %}
-                <tr>
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.productname }}</td>
-                    <td>RM {{ product.productprice }}</td>
-                    <td>{{ product.productstock }}</td>
-                    <td>
-                        <img src="data:{{ product.picture_mimetype }};base64,{{ product.productpicture | b64encode }}" alt="{{ product.productname }}">
-                    </td>
-                    <td>
-                        <!-- Add to Cart form -->
-                        <form method="POST" action="/add_to_cart/{{ product.id }}">
-                            <input type="number" name="quantity" value="1" min="1" max="{{ product.productstock }}" required>
-                            <button type="submit">Add to Cart</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <button type="button" onclick="window.location.href='/cart'">View my cart</button>
-    <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+    <div class="buttons-container">
+        <button type="button" onclick="window.location.href='/cart'">View My Cart</button>
+        <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+    </div>
+
 </body>
 </html>
