@@ -582,9 +582,6 @@ def updatefund():
     
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
 
-
-
-
 #################################################################################################################################################################################################
 #view customer function
 @tandtweb.route('/viewcustomer', methods=['GET'])
@@ -786,7 +783,7 @@ def loginadmin():
 
         if adminusername in admin_access and adminpassword == admin_access[adminusername]:
             session['username'] = adminusername
-            return render_template('adminhome.html')
+            return render_template('adminhome.html', name=adminusername)
         else:
             return render_template('adminfaillogin.html')
 
@@ -811,7 +808,7 @@ def logincourier():
 
         if courierusername in courier_access and courierpassword == courier_access[courierusername]:
             session['username'] = courierusername
-            return render_template('courierhome.html')
+            return render_template('courierhome.html', name=courierusername)
         else:
             return render_template('courierfaillogin.html')
 
@@ -834,7 +831,7 @@ def loginsponsor():
 
         if sponsorusername in sponsor_access and sponsorpassword == sponsor_access[sponsorusername]:
             session['username'] = sponsorusername
-            return render_template('sponsorhome.html')
+            return render_template('sponsorhome.html', name=sponsorusername)
         else:
             return render_template('sponsorfaillogin.html')
 
@@ -851,7 +848,7 @@ def customerlogin():
     user=customer.query.filter_by(id=id).first()
     if user and user.password==password:
       session['user_id']=user.id
-      return render_template("customerhome.html")
+      return render_template("customerhome.html", name=user.name)
     else:
       return render_template("customerloginfail.html")
     
