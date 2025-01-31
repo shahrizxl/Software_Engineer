@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from datetime import datetime
+from datetime import date
+
 
 
 db =SQLAlchemy()
@@ -79,7 +81,7 @@ class Feedback(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     ph = db.Column(db.String(150), unique=True, nullable=False)
     content = db.Column(db.String(1500), nullable=False)
-    date=db.Column(db.DateTime(),default=datetime)
+    date = db.Column(db.Date, nullable=False, default=date.today)
     
 class Notification(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -344,15 +346,7 @@ def gtracking():
 def noticus():
     customer_id = session.get('user_id')
     
-    if not customer_id:
-        flash('Please log in to view your notification details.', 'error')
-        return redirect('/customer')
-    
     noti = Notification.query.filter_by(customer_id=customer_id).all()
-
-    if not noti:
-        flash('No notification details found.', 'info')
-        return redirect('/customerhome')
 
     return render_template('viewnoticus.html', noti=noti)
 
@@ -410,7 +404,12 @@ def view_feedbackspon():
     feedback_list = Feedback.query.all()  
     return render_template('viewfeedbackspon.html', feedback_list=feedback_list)
 
-    
+
+#view feedback function for sponsor
+@tandtweb.route('/viewadmin', methods=['GET'])
+def view_admin():
+    admin_list = admin.query.all()  
+    return render_template('viewadmin.html', admin_list=admin_list) 
 #################################################################################################################################################################################################
 #view purchased items function
 @tandtweb.route('/purchaseditems')
@@ -493,13 +492,13 @@ def delete_delivery(delivery_id):
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
-#view delivery function for admin
+#view delivery function for courier
 @tandtweb.route('/viewdel', methods=['GET'])
 def view_del():
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
-#view delivery function for courier
+#view delivery function for admin
 @tandtweb.route('/viewdelivery', methods=['GET'])
 def view_delivery():
     delivery_list = Delivery.query.all()
@@ -582,9 +581,6 @@ def updatefund():
     )
     
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
-
-
-
 
 #################################################################################################################################################################################################
 #view customer function
@@ -787,7 +783,7 @@ def loginadmin():
 
         if adminusername in admin_access and adminpassword == admin_access[adminusername]:
             session['username'] = adminusername
-            return render_template('adminhome.html')
+            return render_template('adminhome.html', name=adminusername)
         else:
             return render_template('adminfaillogin.html')
 
@@ -812,7 +808,7 @@ def logincourier():
 
         if courierusername in courier_access and courierpassword == courier_access[courierusername]:
             session['username'] = courierusername
-            return render_template('courierhome.html')
+            return render_template('courierhome.html', name=courierusername)
         else:
             return render_template('courierfaillogin.html')
 
@@ -835,7 +831,7 @@ def loginsponsor():
 
         if sponsorusername in sponsor_access and sponsorpassword == sponsor_access[sponsorusername]:
             session['username'] = sponsorusername
-            return render_template('sponsorhome.html')
+            return render_template('sponsorhome.html', name=sponsorusername)
         else:
             return render_template('sponsorfaillogin.html')
 
@@ -852,7 +848,7 @@ def customerlogin():
     user=customer.query.filter_by(id=id).first()
     if user and user.password==password:
       session['user_id']=user.id
-      return render_template("customerhome.html")
+      return render_template("customerhome.html", name=user.name)
     else:
       return render_template("customerloginfail.html")
     

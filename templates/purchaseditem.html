@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{ item.product.productname }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>${{ item.totalprice }}</td>
+                        <td>RM{{ item.totalprice }}</td>
                         <td>{{ item.refund_status }}</td>
                         <td>
                           {% if item.refund_status == 'Pending' or item.refund_status == 'Refund Rejected' %}
