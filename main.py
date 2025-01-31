@@ -346,15 +346,7 @@ def gtracking():
 def noticus():
     customer_id = session.get('user_id')
     
-    if not customer_id:
-        flash('Please log in to view your notification details.', 'error')
-        return redirect('/customer')
-    
     noti = Notification.query.filter_by(customer_id=customer_id).all()
-
-    if not noti:
-        flash('No notification details found.', 'info')
-        return redirect('/customerhome')
 
     return render_template('viewnoticus.html', noti=noti)
 
