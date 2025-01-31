@@ -500,13 +500,13 @@ def delete_delivery(delivery_id):
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
-#view delivery function for admin
+#view delivery function for courier
 @tandtweb.route('/viewdel', methods=['GET'])
 def view_del():
     delivery_list = Delivery.query.all()
     return render_template('viewdel.html', delivery_list=delivery_list)
 
-#view delivery function for courier
+#view delivery function for admin
 @tandtweb.route('/viewdelivery', methods=['GET'])
 def view_delivery():
     delivery_list = Delivery.query.all()
