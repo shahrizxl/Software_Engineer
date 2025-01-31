@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from datetime import datetime
+from datetime import date
+
 
 
 db =SQLAlchemy()
@@ -79,7 +81,7 @@ class Feedback(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True, nullable=False)
     ph = db.Column(db.String(150), unique=True, nullable=False)
     content = db.Column(db.String(1500), nullable=False)
-    date=db.Column(db.DateTime(),default=datetime)
+    date = db.Column(db.Date, nullable=False, default=date.today)
     
 class Notification(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -410,7 +412,12 @@ def view_feedbackspon():
     feedback_list = Feedback.query.all()  
     return render_template('viewfeedbackspon.html', feedback_list=feedback_list)
 
-    
+
+#view feedback function for sponsor
+@tandtweb.route('/viewadmin', methods=['GET'])
+def view_admin():
+    admin_list = admin.query.all()  
+    return render_template('viewadmin.html', admin_list=admin_list) 
 #################################################################################################################################################################################################
 #view purchased items function
 @tandtweb.route('/purchaseditems')
