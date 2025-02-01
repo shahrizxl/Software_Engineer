@@ -1,0 +1,85 @@
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;  /* Light background color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    margin: 0;
+}
+
+/* Page Title */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Form Styling */
+form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Label Styling */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input, Select Styling */
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0 20px 0;  /* Space between input fields */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    
+}
+
+input[type="date"] {
+    width: 90%; /* Full width for date input */
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button[type="submit"]:hover {
+    background-color: #4CAF50;  /* Green on hover */
+}
+
+button[type="button"]:hover {
+    background-color: #f44336;  /* Red on hover for cancel */
+}
+
+/* Cancel Button (separate from Submit) */
+button[type="button"] {
+    width: auto;
+    margin-top: 10px;
+}
+

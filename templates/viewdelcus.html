@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery Details</title>
-
+    <link rel="stylesheet" href="/static/viewtable.css">
 </head>
 <body>
-    <h1>Your Delivery Details</h1>
+    <h1 class="viewcus">📦 Your Delivery Details</h1> <!-- Added class viewcus for consistency -->
 
     {% if deliveries %}
-        <table>
+        <table class="viewcus"> <!-- Added class viewcus for consistency -->
             <thead>
                 <tr>
                     <th>Delivery ID</th>
@@ -34,7 +34,6 @@
         <p class="no-deliveries">No delivery details found.</p>
     {% endif %}
     
-    <button type="button" onclick="window.location.href='/customerhome'">Back</button>
-
+    <button type="button" onclick="window.location.href='/customerhome'">Back</button> <!-- Retained button with existing styling -->
 </body>
 </html>

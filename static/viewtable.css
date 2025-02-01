@@ -89,3 +89,15 @@ button {
 button:hover {
     background-color: #555;
 }
+
+
+/* Specific Styling for Accept and Reject Buttons */
+.acceptrej {
+    font-size: 14px;
+    max-height: 40px ;
+    margin-top: 0px;
+}
+
+.viewref {
+    border-bottom: 2px solid #b8b8b8; /* Light grey line between rows */
+}

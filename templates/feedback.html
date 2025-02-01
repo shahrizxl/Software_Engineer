@@ -7,25 +7,48 @@
     <link rel="stylesheet" href="/static/feedback.css">
 </head>
 <body>
-    <h1>Feedback Form</h1>
+
+    <table>
+    <h1>★ Feedback Form</h1>
+    <div class="main-container">
+    
     <form action="/feedback" method="post">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required><br><br>
+        
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required><br><br>
+        <td>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" required><br><br>
+        </div>
 
-        <label for="ph">Phone Number:</label>
-        <input type="text" name="ph" id="ph" pattern="\d{10,}" title="Must be at least 10 digits" required><br><br>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required><br><br>
+        </div>
 
-        <label for="content">Feedback:</label><br>
-        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+        <div class="form-group">
+            <label for="ph">Phone Number</label>
+            <input type="text" name="ph" id="ph" pattern="\d{10,}" title="Must be at least 10 digits" required><br><br>
+        </div>
 
-        <label>date:</label>
-        <input type="date" name="date" required><br><br>
+        <div class="form-group">
+            <label for="content">Feedback</label><br>
+            <textarea name="content" id="content" rows="6" required></textarea><br><br>
+        </div>
 
-        <button type="submit">Submit Feedback</button>
-        <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" name="date" required><br><br>
+        </div>
+
+        <div class="buttons-container">
+            <button type="submit">Submit Feedback</button>
+            <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+        </div>
+        </td>
     </form>
+    </table>
+
+    </div>
 </body>
 </html>

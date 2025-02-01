@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Purchased Items</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/viewtable.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     {% for item in purchased_items %}
-                    <tr>
+                    <tr class="viewref">
                         <td>{{ item.customer_id }}</td>
                         <td>{{ item.product.productname }}</td>
                         <td>{{ item.quantity }}</td>
@@ -33,13 +33,15 @@
                         <td>{{ item.refund_status }}</td>
                         <td>{{ item.refund_reason or 'N/A' }}</td>
                         <td>
-                          <form action="/accept/{{ item.id }}" method="GET" style="display: inline;">
-                              <button type="submit">Accept</button>
-                          </form>
-                          
-                          <form action="/reject/{{ item.id }}" method="POST"  style="display: inline;">
-                              <button type="submit">Reject</button>
-                          </form>
+                            <div class="buttons-container"> 
+                                <form action="/accept/{{ item.id }}" method="GET" style="display: inline;">
+                                    <button type="submit" class="acceptrej">Accept</button>
+                                </form>
+                                
+                                <form action="/reject/{{ item.id }}" method="POST"  style="display: inline;">
+                                    <button type="submit" class="acceptrej">Reject</button>
+                                </form>
+                            </div>
                       </td>
 
                     </tr>
@@ -49,6 +51,10 @@
         {% else %}
             <p>No purchased items found.</p>
         {% endif %}
+
+        <div class="buttons-container">
+            <button type="button" onclick="window.location.href='/courierhome'">Back</button>
+        </div>
     </div>
 </body>
 </html>
