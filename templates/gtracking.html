@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Customer ID</th>
                 <th>Address</th>
                 <th>Expected Delivery</th>
                 <th>Delivery Status</th>
@@ -20,6 +21,7 @@
             {% for delivery in delivery_list %}
             <tr>
                 <td>{{ delivery.id }}</td>
+                <td>{{ delivery.customer_id }}</td>
                 <td>{{ delivery.address }}</td>
                 <td>{{ delivery.expected_delivery_date }}</td>
                 <td>{{ delivery.delivery_status }}</td>
