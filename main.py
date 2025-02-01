@@ -751,41 +751,32 @@ def customerhome():
 @tandtweb.route('/adminhome')
 def adminhome():
     if 'user_id' in session and session.get('role') == 'admin':
-        name = session.get('name')  # Retrieve the name from the session
+        name = session.get('name') 
         return render_template('adminhome.html', name=name)
     else:
-        return redirect('/admin')  # Redirect to login if not logged in
+        return redirect('/admin')  
 
 @tandtweb.route('/sponsorhome')
 def sponsorhome():
     if 'user_id' in session and session.get('role') == 'sponsor':
-        name = session.get('name')  # Retrieve the name from the session
+        name = session.get('name')  
         return render_template('sponsorhome.html', name=name)
     else:
-        return redirect('/sponsor')  # Redirect to login if not logged in
+        return redirect('/sponsor')  
 
 @tandtweb.route('/courierhome')
 def courierhome():
     if 'user_id' in session and session.get('role') == 'courier':
-        name = session.get('name')  # Retrieve the name from the session
+        name = session.get('name')  
         return render_template('courierhome.html', name=name)
     else:
-        return redirect('/courier')  # Redirect to login if not logged in
-
-
-@tandtweb.route('/aboutus')
-def aboutus():
-  return render_template('aboutus.html')
-
-@tandtweb.route('/confirmcheckout')
-def confirmcart():
-  return render_template('confirmcheckout.html')
+        return redirect('/courier')  
 
 #admin login function
 @tandtweb.route('/admin', methods=['GET', 'POST'])
 def loginadmin():
     if request.method == 'POST':
-        id = request.form.get('id')  # Use .get() to avoid KeyError
+        id = request.form.get('id')  
         password = request.form.get('password')
         
         if not id or not password:
@@ -809,7 +800,7 @@ def loginadmin():
 @tandtweb.route('/courier', methods=['GET', 'POST'])
 def logincourier():
     if request.method == 'POST':
-        id = request.form.get('id')  # Use .get() to avoid KeyError
+        id = request.form.get('id')  
         password = request.form.get('password')
         
         if not id or not password:
@@ -831,7 +822,7 @@ def logincourier():
 @tandtweb.route('/sponsor', methods=['GET', 'POST'])
 def loginsponsor():
     if request.method == 'POST':
-        id = request.form.get('id')  # Use .get() to avoid KeyError
+        id = request.form.get('id') 
         password = request.form.get('password')
         
         if not id or not password:
