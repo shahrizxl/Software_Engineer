@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
+    <link rel="stylesheet" href="/static/cart.css">
+
 </head>
 <body>
     <h1>Your Cart</h1>
@@ -21,41 +23,49 @@
             <tbody>
                 {% for item in cart_items %}
                     <tr>
-                        <td>{{ item.product.productname }}</td>
+                        <td>
+                            <div class="product-info">
+                                <img src="data:{{ item.product.picture_mimetype }};base64,{{ item.product.productpicture | b64encode }}" alt="{{ item.product.productname }}" class="product-image">
+                                <span>{{ item.product.productname }}</span>
+                            </div>
+                        </td>
                         <td>RM {{ item.product.productprice }}</td>
                         <td>{{ item.quantity }}</td>
                         <td>RM {{ item.product.productprice * item.quantity }}</td>
                         <td>
                             <form action="/removefromcart/{{ item.id }}" method="POST" style="display:inline;">
-                                <button type="submit">Remove</button>
+                                <button type="submit" class="remove-btn">Remove</button>
                             </form>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <h3>Total: RM {{ total_price }}</h3>
 
-        <!-- Checkout Form -->
-        <form method="POST" action="{{ url_for('checkout') }}">
-            <h3>Cart Summary</h3>
-            {% for item in cart_items %}
-                <p>{{ item.product.productname }} - RM {{ item.product.productprice }} x {{ item.quantity }}</p>
-            {% endfor %}
-            <p>Total: RM {{ total_price }}</p>
+        <h3 class="subtotal">Subtotal : RM {{ total_price }}</h3>
+        
+        <div class="cart-summary">
+            <!-- Checkout Form -->
+            <form method="POST" action="{{ url_for('checkout') }}">
+                <h3 class="cartsum">Cart Summary</h3>
+                {% for item in cart_items %}
+                    <p>{{ item.product.productname }} - RM {{ item.product.productprice }} x {{ item.quantity }}</p>
+                {% endfor %}
+                <p>Total: RM {{ total_price }}</p>
 
-            <!-- Address Input -->
-            <label for="address">Delivery Address:</label>
-            <textarea id="address" name="address" rows="4" cols="50" required placeholder="Enter your address"></textarea>
-            <br><br>
+                <!-- Address Input -->
+                <label for="address">Delivery Address:</label>
+                <textarea id="address" name="address" rows="4" cols="50" required placeholder="Enter your address"></textarea>
+                
 
-            <button type="submit">Proceed to Checkout</button>
-        </form>
-
+                <button type="submit" class="proceed">Proceed to Checkout</button>
+                <button type="button" class="continue-shopping" onclick="window.location.href='/products2'">Continue Shopping</button>
+            </form>
+        </div>
+        
     {% else %}
         <p>Your cart is empty.</p>
     {% endif %}
 
-    <button onclick="window.location.href='/products2'">Continue Shopping</button>
 </body>
 </html>

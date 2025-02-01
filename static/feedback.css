@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-top: 20px;
+}
+
+
+/* Main container for aligning left and right sections */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px; /* Space between the containers and table */
+}
+
+/* Aligning Labels and Inputs Horizontally */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    width: 30%;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.form-group input {
+    width: 60%;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Styling for Input Fields and Select Box */
+input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.buttons-container {
+    display: flex;              /*  flexbox for horizontal layout */
+    gap: 20px;                  /* Space between buttons */
+    justify-content: center;    /* centers buttons */
+    width: 100%;
+    margin-top: 10px;           /* margin between form and buttons */
+}
+
+/* Button Styling */
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 35%;
+    height: fit-content;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+button[type="submit"]:hover {
+    background-color: #4CAF50;  
+    transition: background-color 0.3s ease;  
+}
+
+
+/* Transaction Log Table Styling */
+table {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(243, 220, 14, 0.1);
+    border-radius: 20px;
+}
+
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+
+
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    max-width: 250px;
+    display: flex;
+    max-height: 70px;
+}

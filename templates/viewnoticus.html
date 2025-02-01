@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Details</title>
+    <link rel="stylesheet" href="/static/viewnoti.css"> 
 </head>
 <body>
     <h1>Your Notifications</h1>
 
     {% if noti %}
-        <table border="1">
+        <table class="viewfeedback">
             <thead>
                 <tr>
                     <th>Notification ID</th>
                     <th>Content</th>
-              
                 </tr>
             </thead>
             <tbody>
                 {% for notification in noti %}
-                    <tr>
+                    <tr class="notification-row"> 
                         <td>{{ notification.id }}</td>
                         <td>{{ notification.content }}</td>
                         

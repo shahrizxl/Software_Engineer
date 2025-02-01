@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Delivery</title>
+    <link rel="stylesheet" href="/static/viewtable.css">
 </head>
 <body>
-    <h1>All Delivery</h1>
-    <table>
+    <h1 class="viewcus">📦 All Delivery</h1>
+    <table class="viewcus">
         <thead>
             <tr>
                 <th>ID</th>
@@ -32,6 +33,6 @@
             {% endfor %}
         </tbody>
     </table>
-    <button type="button" onclick="window.location.href='/customerhome'">Back</button>
+    <button type="button" onclick="window.location.href='/adminhome'">Back</button>
 </body>
 </html>

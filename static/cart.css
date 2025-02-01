@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+/* General Page Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Page Title */
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* Cart Summary Styling */
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    max-width: 300px;
+    display: flex;
+    max-height: 70px;
+}
+
+.cart-summary {
+    background-color: #ffffff;
+    /* padding: 20px; */
+    width: 100%;
+    max-width: 800px;
+    /* margin-top: 20px; */
+}
+
+h3.cartsum{
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+
+.subtotal {
+    font-size: 17px;  
+    font-weight: bold;  
+    /* margin-top: 20px;  Space above the total */
+    color: #333;  
+
+    display: flex; /* Aligns buttons in a row */
+    justify-content: flex-end; /* Pushes them to the right */
+    width: 32%; /* position */
+}
+
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 800px;
+
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #ffffff;
+    color: rgb(8, 8, 8);
+}
+
+td {
+    background-color: #fff;
+}
+
+td img {
+    width: 80px; /* Adjusted size of product image */
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Styling for Product Image and Name */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;  /* Space between image and product name */
+}
+
+.product-info img {
+    width: 70px; /* Set size for product image */
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-info span {
+    font-size: 14px;  /* Adjust font size for product name */
+}
+
+/* Add Line Separator for Each Row */
+table tr {
+    border-bottom: 3px solid #ddd; /* Light grey line between rows */
+}
+
+/* Buttons */
+/* General Button Styling */
+
+
+/* Container for buttons */
+.buttons-container {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: flex-end; /* Pushes them to the right */
+    gap: 5px; /* Space between buttons */
+}
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Specific Button Styles */
+
+/* Remove Button */
+.remove-btn:hover,.request-refund:hover, .delete:hover {
+    background-color: #ea1c1c;  /* Red color for remove */
+}
+
+/* Proceed to Checkout Button */
+.proceed {
+    font-size: 14px;
+    max-width: fit-content;
+}
+
+.proceed:hover {
+    background-color: #45a049;  /* Darker green on hover */
+}
+
+/* Continue Shopping Button */
+.continue-shopping {
+    font-size: 14px;
+    max-width: fit-content;
+}
+
+/* Request Refund Button */
+.request-refund {
+    font-size: 14px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.request-refund:disabled {
+    background-color: #ccc;  /* Disabled button */
+    cursor: not-allowed;
+}
+
+
+table.viewdeliveryy th, table.viewdeliveryy td {
+    text-align: center;  /* Align the text to the center */
+}
+
+/* Specific styling for other table elements */
+table.viewdeliveryy {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    max-width: 800px;
+}
