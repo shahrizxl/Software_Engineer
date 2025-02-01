@@ -742,19 +742,35 @@ def logout():
 
 @tandtweb.route('/customerhome')
 def customerhome():
-  return render_template('customerhome.html')
+    if 'user_id' in session:
+        name = session.get('name')  
+        return render_template('customerhome.html', name=name)
+    else:
+        return redirect('/customer')  
 
 @tandtweb.route('/adminhome')
 def adminhome():
-  return render_template('adminhome.html')
+    if 'user_id' in session and session.get('role') == 'admin':
+        name = session.get('name')  # Retrieve the name from the session
+        return render_template('adminhome.html', name=name)
+    else:
+        return redirect('/admin')  # Redirect to login if not logged in
 
 @tandtweb.route('/sponsorhome')
 def sponsorhome():
-  return render_template('sponsorhome.html')
+    if 'user_id' in session and session.get('role') == 'sponsor':
+        name = session.get('name')  # Retrieve the name from the session
+        return render_template('sponsorhome.html', name=name)
+    else:
+        return redirect('/sponsor')  # Redirect to login if not logged in
 
 @tandtweb.route('/courierhome')
 def courierhome():
-  return render_template('courierhome.html')
+    if 'user_id' in session and session.get('role') == 'courier':
+        name = session.get('name')  # Retrieve the name from the session
+        return render_template('courierhome.html', name=name)
+    else:
+        return redirect('/courier')  # Redirect to login if not logged in
 
 
 @tandtweb.route('/aboutus')
@@ -769,68 +785,65 @@ def confirmcart():
 @tandtweb.route('/admin', methods=['GET', 'POST'])
 def loginadmin():
     if request.method == 'POST':
-        adminusername = request.form['username']
-        adminpassword = request.form['password']
+        id = request.form.get('id')  # Use .get() to avoid KeyError
+        password = request.form.get('password')
         
-        #only this id can login as admin
-        admin_access = {
-            '1211111953': 'shah',
-            '1211109514': 'ami',
-            '1211109601': 'batrisya',
-            '1211108832': 'natasha'
-        }
-
-        if adminusername in admin_access and adminpassword == admin_access[adminusername]:
-            session['username'] = adminusername
-            return render_template('adminhome.html', name=adminusername)
+        if not id or not password:
+            flash('ID and password are required!', 'error')
+            return redirect('/admin')
+        
+        admin_user = admin.query.filter_by(id=id).first()
+        if admin_user and admin_user.password == password:
+            session['user_id'] = admin_user.id
+            session['role'] = 'admin'
+            session['name'] = admin_user.name
+            return render_template('adminhome.html', name=admin_user.name)
         else:
             return render_template('adminfaillogin.html')
 
     return render_template('adminlogin.html')
   
   
-  
+
 #courier login function
 @tandtweb.route('/courier', methods=['GET', 'POST'])
 def logincourier():
     if request.method == 'POST':
-        courierusername = request.form['username']
-        courierpassword = request.form['password']
+        id = request.form.get('id')  # Use .get() to avoid KeyError
+        password = request.form.get('password')
         
-        #only this id can login as courier
-        courier_access = {
-            '1211111953': 'shah',
-            '1211109514': 'ami',
-            '1211109601': 'batrisya',
-            '1211108832': 'natasha'
-        }
-
-        if courierusername in courier_access and courierpassword == courier_access[courierusername]:
-            session['username'] = courierusername
-            return render_template('courierhome.html', name=courierusername)
+        if not id or not password:
+            flash('ID and password are required!', 'error')
+            return redirect('/courier')
+        
+        courier_user = courier.query.filter_by(id=id).first()
+        if courier_user and courier_user.password == password:
+            session['user_id'] = courier_user.id
+            session['role'] = 'courier'
+            session['name'] = courier_user.name
+            return render_template('courierhome.html', name=courier_user.name)
         else:
             return render_template('courierfaillogin.html')
 
     return render_template('courierlogin.html')
-  
+ 
 #sponsor login function
 @tandtweb.route('/sponsor', methods=['GET', 'POST'])
 def loginsponsor():
     if request.method == 'POST':
-        sponsorusername = request.form['username']
-        sponsorpassword = request.form['password']
+        id = request.form.get('id')  # Use .get() to avoid KeyError
+        password = request.form.get('password')
         
-        #only this id can login as sponsor
-        sponsor_access = {
-            '1211111953': 'shah',
-            '1211109514': 'ami',
-            '1211109601': 'batrisya',
-            '1211108832': 'natasha'
-        }
-
-        if sponsorusername in sponsor_access and sponsorpassword == sponsor_access[sponsorusername]:
-            session['username'] = sponsorusername
-            return render_template('sponsorhome.html', name=sponsorusername)
+        if not id or not password:
+            flash('ID and password are required!', 'error')
+            return redirect('/sponsor')
+        
+        sponsor_user = sponsor.query.filter_by(id=id).first()
+        if sponsor_user and sponsor_user.password == password:
+            session['user_id'] = sponsor_user.id
+            session['role'] = 'sponsor'
+            session['name'] = sponsor_user.name
+            return render_template('sponsorhome.html', name=sponsor_user.name)
         else:
             return render_template('sponsorfaillogin.html')
 
@@ -847,6 +860,7 @@ def customerlogin():
     user=customer.query.filter_by(id=id).first()
     if user and user.password==password:
       session['user_id']=user.id
+      session['name'] = user.name 
       return render_template("customerhome.html", name=user.name)
     else:
       return render_template("customerloginfail.html")
