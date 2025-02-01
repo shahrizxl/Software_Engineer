@@ -737,7 +737,7 @@ def home():
 
 @tandtweb.route('/logout')
 def logout():
-    session.pop('user_id', None)  
+    session.clear()
     return render_template('home.html')
 
 
