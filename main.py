@@ -78,8 +78,8 @@ class courier(db.Model,UserMixin):
 class Feedback(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    ph = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    ph = db.Column(db.String(150), nullable=False)
     content = db.Column(db.String(1500), nullable=False)
     date = db.Column(db.Date, nullable=False, default=date.today)
     
@@ -377,7 +377,6 @@ def feedback():
         email = request.form.get('email')
         ph = request.form.get('ph')
         content = request.form.get('content')
-        date = datetime.strptime(request.form['date'], '%Y-%m-%d')
 
         if not name or not email or not ph or not content:
             flash('All fields are required!', 'error')
