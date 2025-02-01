@@ -456,7 +456,7 @@ def accept_refund(item_id):
     
     purchased_item.refund_status = 'Refund Accepted'
     
-    new_transaction = Sales(type='Subtract', amount=purchased_item.totalprice, purpose='Refund')
+    new_transaction = Sales(type='Subtract', amount=purchased_item.totalprice, purpose='Refund',date=datetime.now())
     db.session.add(new_transaction)
     
     db.session.commit()
