@@ -33,7 +33,7 @@
                     <tr>
                         <td>{{ product.id }}</td>
                         <td>{{ product.productname }}</td>
-                        <td>RM {{ product.productprice }}</td>
+                        <td>RM {{ '%.2f' % product.productprice }}</td>
                         <td>{{ product.productstock }}</td>
                         <td>
                             <img src="data:{{ product.picture_mimetype }};base64,{{ product.productpicture | b64encode }}" alt="{{ product.productname }}">

@@ -24,7 +24,7 @@
                 <div class="product-info">
                     <!-- <p>ID: {{ product.id }}</p> -->
                     <p>{{ product.productname }}</p>
-                    <p>Price: RM {{ product.productprice }}</p>
+                    <p>Price: RM {{ '%.2f' % product.productprice }}</p>
                     <p>Stock: {{ product.productstock }}</p>
                 </div>
                 <form method="POST" action="/add_to_cart/{{ product.id }}">
