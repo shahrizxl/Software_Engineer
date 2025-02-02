@@ -533,7 +533,7 @@ def edit_delivery(delivery_id):
         # Commit all changes at once
         db.session.commit()
         flash('Delivery and associated purchased items updated successfully!', 'success')
-        return render_template('courierhome.html')
+        return redirect('/courierhome') 
 
     return render_template('edit_del.html', delivery=delivery)
 
