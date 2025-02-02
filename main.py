@@ -431,7 +431,7 @@ def refund_form(item_id):
         purchased_item.refund_status = 'Refund Requested'
         db.session.commit()
         flash('Refund request submitted successfully.', 'success')
-        return render_template('customerhome.html')  
+        return redirect('/customerhome')   
 
     return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
 
