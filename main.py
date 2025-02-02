@@ -513,9 +513,6 @@ def delivery_detail():
 
     deliveries = Delivery.query.filter_by(customer_id=customer_id).all()
 
-    if not deliveries:
-        flash('No delivery details found.', 'info')
-        return redirect('/customerhome')
 
     return render_template('viewdelcus.html', deliveries=deliveries)
 
