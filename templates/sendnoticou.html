@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="/static/noti.css">
 </head>
 <body>
+    <div class="flash-message-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     <div class="form-container">
         <form action="/sncou" method="post">
         

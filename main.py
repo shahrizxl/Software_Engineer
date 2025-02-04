@@ -274,6 +274,8 @@ def noti():
         new_noti = Notification(customer_id=customer_id, content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Notification sent successfully!', 'success')
+        
         
     return render_template('sendnoticus.html')
 
@@ -287,6 +289,8 @@ def couscus():
         new_noti = Notification(customer_id=customer_id, content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Notification sent successfully!', 'success')
+        
         
     return render_template('couscus.html')
 
@@ -299,6 +303,8 @@ def notispo():
         new_noti = Notificationsponsor(content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Notification sent successfully!', 'success')
+        
         
     return render_template('sendnotispo.html')
 
@@ -311,6 +317,8 @@ def sposadmin():
         new_noti = Notificationadmin(content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Notification sent successfully!', 'success')
+        
         
     return render_template('sposadmin.html')
 
@@ -323,6 +331,8 @@ def noticou():
         new_noti = Notificationcourier(content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Notification sent successfully!', 'success')
+        
         
     return render_template('sendnoticou.html')
 
@@ -706,15 +716,24 @@ def edit_product(product_id):
 def delete_product(product_id):
     product = Product.query.get(product_id)
     
-    if product:
-        db.session.delete(product)
-        db.session.commit()
-        flash('Product deleted successfully!', 'success')
-    else:
+    if not product:
         flash('Product not found.', 'error')
-
-    products = Product.query.all()
-    return render_template('view_products.html', products=products)
+        return redirect('/product_admin')
+    
+    # Check if the product is in any cart or checkout
+    cart_items = Cart.query.filter_by(product_id=product_id).first()
+    checkout_items = Checkout.query.filter_by(product_id=product_id).first()
+    
+    if cart_items or checkout_items:
+        flash('This product is currently in use (in cart or checkout) and cannot be deleted.', 'error')
+        return redirect('/product_admin')
+    
+    # If the product is not in use, proceed with deletion
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!', 'success')
+    
+    return redirect('/product_admin')
 
 
 #################################################################################################################################################################################################
