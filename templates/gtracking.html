@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Deliveries</title>
+    <link rel="stylesheet" href="/static/gtracking.css">
 </head>
 <body>
-    <h1>Generate tracking details</h1>
-    <table border="1" cellspacing="0" cellpadding="5">
+    <h1>🚚 Generate tracking details</h1>
+    <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Delivery ID</th>
                 <th>Customer ID</th>
                 <th>Address</th>
                 <th>Expected Delivery</th>
@@ -30,15 +31,19 @@
         </tbody>
     </table>
 
-    <form action="/gtracking" method="post">
-        <label for="customer_id">Customer ID:</label>
-        <input name="customer_id" id="customer_id" required><br><br>
 
-        <label for="content">Notification:</label><br>
-        <textarea name="content" id="content" rows="6" required></textarea><br><br>
+    <div class="main-container">
+        <h2>  Notification to Customer</h2>
+        <form action="/gtracking" method="post">
+            <label for="customer_id">Customer ID:</label>
+            <input name="customer_id" id="customer_id" required><br><br>
 
-        <button type="submit">Submit Notification</button>
-    </form>
+            <label for="content">Notification:</label><br>
+            <textarea name="content" id="content" rows="6" required></textarea><br><br>
+
+            <button type="submit">Submit Notification</button>
+        </form>
+    </div>
 
     <button type="button" onclick="window.location.href='/courierhome'">Back to Courier Home</button>
 </body>
