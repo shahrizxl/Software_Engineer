@@ -579,13 +579,8 @@ def updatefund():
     return render_template('fund.html', transactions=transactions, total_balance=total_balance)
 
 #################################################################################################################################################################################################
-#view customer function
-@tandtweb.route('/viewcustomer', methods=['GET'])
-def view_customer():
-    customer_list = customer.query.all()  
-    return render_template('viewcustomer.html', customer_list=customer_list)
 
-#delete customer function for admin
+#view customer function for sponsor
 @tandtweb.route('/viewcus', methods=['GET'])
 def view_cus():
     customer_list = customer.query.all()  
