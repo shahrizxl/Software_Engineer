@@ -123,3 +123,29 @@ input {
     align-items: center;
     height: 50%;
 }
+
+/* Flash Message Container */
+.flash-message-container {
+    position: absolute;
+    top: 20px; /* Pushes messages to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    z-index: 1000; /* Ensures messages appear above other elements */
+}
+
+/* Flash Message Styling */
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 16px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}

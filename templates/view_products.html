@@ -8,7 +8,20 @@
 
 </head>
 <body>
+    <!-- Flash Messages Section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <h1>All Products</h1>
+    
+    <!-- Rest of your existing template -->
 
     <div class="table-container">
         <form method="POST" action="/product_admin" class=" search-form">
