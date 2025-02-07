@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Fund</title>
+    <title>Transaction Log</title>
     <link rel="stylesheet" href="/static/viewtable.css">
 </head>
 <body>
-     <h1 class="fundsale">☲ Transaction Log</h1> <!--📃 -->
+    <h1 class="fundsale">☲ Transaction Log</h1> <!--📃 -->
+
+    <!-- Totals Section -->
+    <div class="totals">
+        <h2>Totals</h2>
+        <p><strong>Total Sales:</strong> RM {{ "{:,.2f}".format(total_sales) }}</p>
+        <p><strong>Total Refunds:</strong> RM {{ "{:,.2f}".format(total_refunds) }}</p>
+        <p><strong>Net Balance:</strong> RM {{ "{:,.2f}".format(net_balance) }}</p>
+    </div>
+
+    <!-- Sales Transactions Table -->
+    <h2>Sales Transactions</h2>
     <table class="fundsale">
         <thead>
             <tr>
@@ -18,8 +29,8 @@
             </tr>
         </thead>
         <tbody>
-            {% if transactions %}
-                {% for transaction in transactions %}
+            {% if sales_transactions %}
+                {% for transaction in sales_transactions %}
                     <tr class="notification-row">
                         <td>{{ transaction.type }}</td>
                         <td>RM {{ "{:,.2f}".format(transaction.amount) }}</td>
@@ -29,11 +40,41 @@
                 {% endfor %}
             {% else %}
                 <tr class="notification-row">
-                    <td colspan="4">No transactions to display.</td>
+                    <td colspan="4">No sales transactions to display.</td>
                 </tr>
             {% endif %}
         </tbody>
     </table>
+
+    <!-- Refund Transactions Table -->
+    <h2>Refund Transactions</h2>
+    <table class="fundsale">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Purpose</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if refund_transactions %}
+                {% for transaction in refund_transactions %}
+                    <tr class="notification-row">
+                        <td>{{ transaction.type }}</td>
+                        <td>RM {{ "{:,.2f}".format(transaction.amount) }}</td>
+                        <td>{{ transaction.purpose }}</td>
+                        <td>{{ transaction.date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr class="notification-row">
+                    <td colspan="4">No refund transactions to display.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
     <button type="button" onclick="window.location.href='/sponsorhome'">Back</button>
 </body>
 </html>

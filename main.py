@@ -162,7 +162,6 @@ def checkout():
     # Fetch cart items for the customer
     cart_items = Cart.query.filter_by(customer_id=customer_id).all()
     if not cart_items:
-        flash('Your cart is empty!', 'error')
         return redirect('/cart')
     
    
@@ -187,9 +186,8 @@ def checkout():
         db.session.delete(item)
     
     db.session.commit()
-
-    # flash('Checkout successful! Your order is being processed.', 'success')
-    return redirect('/customerhome')  # Redirect to customer home or order summary page
+    flash('Checkout successful! Your order is being processed.', 'success')
+    return redirect('/cart')  # Redirect to customer home or order summary page
 
 #################################################################################################################################################################################################
 
@@ -441,7 +439,8 @@ def refund_form(item_id):
         purchased_item.refund_reason = refund_reason
         purchased_item.refund_status = 'Refund Requested'
         db.session.commit()
-        return redirect('/customerhome')   
+        flash('Refund request sent successfully.', 'success')
+        return redirect('/purchaseditems')   
 
     return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
 
@@ -480,7 +479,7 @@ def reject_refund(item_id):
     purchased_item.refund_status = 'Refund Rejected'
     
     db.session.commit()
-    flash('Refund request rejected.', 'danger')
+    flash('Refund request rejected.', 'failed')
     return redirect('/viewref')  
 
 
@@ -543,7 +542,7 @@ def edit_delivery(delivery_id):
         # Commit all changes at once
         db.session.commit()
         flash('Delivery updated successfully!', 'success')
-        return redirect('/courierhome') 
+        return redirect('/viewdel') 
 
     return render_template('edit_del.html', delivery=delivery)
 
@@ -553,9 +552,26 @@ def edit_delivery(delivery_id):
 #view sale function for sponsor
 @tandtweb.route('/fundsale', methods=['GET'])
 def view_sale():
-    transactions = Sales.query.filter(Sales.purpose == 'Payment for items').all()
-    return render_template('fundsale.html', transactions=transactions)
-
+    # Fetch sales transactions (purpose = 'Payment for items')
+    sales_transactions = Sales.query.filter(Sales.purpose == 'Payment for items').all()
+    
+    # Fetch refund transactions (purpose = 'Refund')
+    refund_transactions = Sales.query.filter(Sales.purpose == 'Refund').all()
+    
+    # Calculate totals
+    total_sales = sum(t.amount for t in sales_transactions)  # Total sales amount
+    total_refunds = sum(t.amount for t in refund_transactions)  # Total refunds amount
+    net_balance = total_sales - total_refunds  # Net balance (sales - refunds)
+    
+    # Pass data to the template
+    return render_template(
+        'fundsale.html',
+        sales_transactions=sales_transactions,
+        refund_transactions=refund_transactions,
+        total_sales=total_sales,
+        total_refunds=total_refunds,
+        net_balance=net_balance
+    )
 #update fund function for sponsor
 @tandtweb.route('/updatefund', methods=['GET', 'POST'])
 def updatefund():
