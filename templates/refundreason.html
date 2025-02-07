@@ -9,8 +9,25 @@
 </head>
 <body>
 
+<<<<<<< HEAD
     
     <div class="container">
+=======
+    <div class="flash-message-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container mt-5">
+>>>>>>> 73ce474ca08b1a3f45d2dc517ec7f20cd673204c
         <h2>Request Refund for {{ product_name }}</h2>
         
         <form action="/refund/{{ item_id }}" method="POST">

@@ -247,7 +247,7 @@ def add_to_cart(product_id):
     product.productstock -= quantity
     db.session.commit()
 
-    # flash('Product added to cart!', 'success')
+    flash('Product added to cart!', 'success')
     return redirect('/products2')
 
 
@@ -346,6 +346,8 @@ def gtracking():
         new_noti = Notification(customer_id=customer_id, content=content)
         db.session.add(new_noti)
         db.session.commit()
+        flash('Tracking updated successfully!', 'success')
+        
 
     delivery_list = Delivery.query.all()
     return render_template('gtracking.html', delivery_list=delivery_list)
@@ -395,7 +397,6 @@ def feedback():
         new_feedback = Feedback(name=name, email=email, ph=ph, content=content)
         db.session.add(new_feedback)
         db.session.commit()
-
         flash('Thank you for your feedback!', 'success')
         return render_template('feedback.html')
 
@@ -440,7 +441,6 @@ def refund_form(item_id):
         purchased_item.refund_reason = refund_reason
         purchased_item.refund_status = 'Refund Requested'
         db.session.commit()
-        flash('Refund request submitted successfully.', 'success')
         return redirect('/customerhome')   
 
     return render_template('refundreason.html',  product_name=purchased_item.product.productname,  item_id=item_id)
@@ -494,7 +494,7 @@ def delete_delivery(delivery_id):
 
         db.session.delete(delivery_to_delete)
         db.session.commit()
-        flash('Delivery entries deleted successfully!', 'success')
+        flash('Delivery detail deleted successfully!', 'success')
     else:
         flash('Delivery not found.', 'error')
 
@@ -542,7 +542,7 @@ def edit_delivery(delivery_id):
 
         # Commit all changes at once
         db.session.commit()
-        flash('Delivery and associated purchased items updated successfully!', 'success')
+        flash('Delivery updated successfully!', 'success')
         return redirect('/courierhome') 
 
     return render_template('edit_del.html', delivery=delivery)
@@ -576,7 +576,7 @@ def updatefund():
         db.session.commit()
         
         # Flash success message
-        # flash(f'Funds {action}ed successfully!', 'success')
+        flash(f'Funds {action}ed successfully!', 'success')
     
     # Calculate total balance
     transactions = Sales.query.all()
@@ -669,6 +669,8 @@ def add_product():
             
             db.session.add(new_product)
             db.session.commit()
+            flash('Product added successfully!', 'success')
+            
             
             return render_template('add_product.html')  
 

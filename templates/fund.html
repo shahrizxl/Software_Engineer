@@ -9,6 +9,19 @@
 
 <body>
 
+    <div class="flash-message-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                    <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
     <h2>🪙 Update Fund</h2> <!-- 💵 -->
 
     <div class="main-container">

@@ -115,21 +115,49 @@ button:hover {
 
 
 /* Flash message styling */
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
+.flash-message-container .alert {
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid transparent;
     border-radius: 4px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.close-btn:hover {
+    color: #555;
+}
+
+.flash-message-container {
+    position: absolute;
+    top: 20px; /* Pushes messages to the top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    z-index: 1000; /* Ensures messages appear above other elements */
+}
+
+/* Flash Message Styling */
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 16px;
 }
 
 .alert-success {
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
-}
-
-.alert-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
 }
