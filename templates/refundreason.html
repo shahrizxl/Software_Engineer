@@ -9,10 +9,8 @@
 </head>
 <body>
 
-<<<<<<< HEAD
     
     <div class="container">
-=======
     <div class="flash-message-container">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -27,7 +25,6 @@
     </div>
 
     <div class="container mt-5">
->>>>>>> 73ce474ca08b1a3f45d2dc517ec7f20cd673204c
         <h2>Request Refund for {{ product_name }}</h2>
         
         <form action="/refund/{{ item_id }}" method="POST">
