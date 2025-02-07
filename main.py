@@ -479,7 +479,7 @@ def reject_refund(item_id):
     purchased_item.refund_status = 'Refund Rejected'
     
     db.session.commit()
-    flash('Refund request rejected.', 'failed')
+    flash('Refund request rejected.', 'error')
     return redirect('/viewref')  
 
 

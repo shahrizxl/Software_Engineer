@@ -170,3 +170,9 @@ input {
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+
+.alert-error {
+    color: #ff0000;
+    background-color: #f2c6c6;
+    border-color: #d6e9c6;
+}
